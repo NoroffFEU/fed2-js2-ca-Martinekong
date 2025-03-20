@@ -1,5 +1,5 @@
-import { BASE_URL } from "./constants.js";
-import { saveToken, saveUsername } from "./storage.js";
+import { API_KEY, BASE_URL } from "./constants.js";
+import { getToken, saveToken, saveUsername } from "./storage.js";
 
 export default class NoroffAPI {
   constructor(apiBase = `${BASE_URL}`) {
@@ -61,9 +61,23 @@ export default class NoroffAPI {
   allPosts = {
     view: async () => {
       try {
-        //
-      } catch {
-        //
+        const response = await fetch(`${this.apiBase}/social/posts`, {
+          headers: {
+            "Authorization": `Bearer ${getToken()}`,
+            "X-Noroff-API-Key": `${API_KEY}`
+          }
+        })
+
+        if (response.ok) {
+          const { data } = await response.json()
+          console.log(data)
+          return data;
+        }
+
+        throw new Error(`Failed to get all posts`)
+
+      } catch(error) {
+        console.log(error)
       }
     }
   }
@@ -71,33 +85,98 @@ export default class NoroffAPI {
   post = {
     view: async (id) => {
       try {
-        //
-      } catch {
-        //
+        const response = await fetch(`${this.apiBase}/social/posts/${id}`, {
+          headers: {
+            "Authorization": `Bearer ${getToken()}`,
+            "X-Noroff-API-Key": `${API_KEY}`
+          }
+        })
+
+        if (response.ok) {
+          const { data } = await response.json()
+          console.log(data)
+          return data;
+        }
+
+        throw new Error(`Failed to get the post with id ${id}`)
+
+      } catch(error) {
+        console.log(error)
       }
     },
 
     create: async (title) => {
+      const newPost = { title: title }
       try {
-        //
-      } catch {
-        //
+        const response = await fetch(`${this.apiBase}/social/posts`, {
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${getToken()}`,
+            "X-Noroff-API-Key": `${API_KEY}`
+          },
+          method: "POST",
+          body: JSON.stringify(newPost)
+        })
+
+        if (response.ok) {
+          const { data } = await response.json()
+          console.log(data)
+          return data;
+        }
+  
+        throw new Error(`Failed to create post with the title: ${title}`)
+
+      } catch(error) {
+        console.log(error)
       }
     },
 
     delete: async (id) => {
       try {
-        //
-      } catch {
-        //
+        const response = await fetch(`${this.apiBase}/social/posts/${id}`, {
+          headers: {
+            "Authorization": `Bearer ${getToken()}`,
+            "X-Noroff-API-Key": `${API_KEY}`
+          },
+          method: "DELETE"
+        })
+
+        if (response.ok) {
+          console.log(response)
+          console.log(`Post deleted successfully`)
+          return;
+        }
+  
+        throw new Error(`Failed to delete post with id ${id}`)
+
+      } catch(error) {
+        console.log(error)
       }
     },
 
     update: async (title, id) => {
+      const updatedPost = { title: title }
       try {
-        //
-      } catch {
-        //
+        const response = await fetch(`${this.apiBase}/social/posts/${id}`, {
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${getToken()}`,
+            "X-Noroff-API-Key": `${API_KEY}`
+          },
+          method: "PUT", 
+          body: JSON.stringify(updatedPost)
+        })
+
+        if (response.ok) {
+          const { data } = await response.json();
+          console.log(data)
+          return data;
+        }
+  
+        throw new Error(`Failed to update post`)
+
+      } catch(error) {
+        console.log(error)
       }
     }
   }
@@ -131,3 +210,11 @@ const api = new NoroffAPI()
 //api.auth.login({email, password})
 //api.auth.register({name, email, password})
 //api.auth.logout()
+
+//api.allPosts.view()
+
+//api.post.view("8072")
+//api.post.create("hello world!") //created successfully, id: 8083
+//api.post.delete("8083") // deleted successfully, id: 8083
+//api.post.create("hello world!") //created successfully, id:8085
+//api.post.update("updated hello world!", "8085") //updated successfully, id: 8085
