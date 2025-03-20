@@ -1,5 +1,5 @@
 import { API_KEY, BASE_URL } from "./constants.js";
-import { getToken, saveToken, saveUsername } from "./storage.js";
+import { getToken, getUsername, saveToken, saveUsername } from "./storage.js";
 
 export default class NoroffAPI {
   constructor(apiBase = `${BASE_URL}`) {
@@ -183,19 +183,51 @@ export default class NoroffAPI {
 
   profile = {
     view: async () => {
+      const name = getUsername()
       try {
-        //
-      } catch {
-        //
+        const response = await fetch(`${this.apiBase}/social/profiles/${name}`, {
+          headers: {
+            "Authorization": `Bearer ${getToken()}`,
+            "X-Noroff-API-Key": `${API_KEY}`
+          }
+        })
+
+        if (response.ok) {
+          const { data } = await response.json()
+          console.log(data)
+          return data;
+        }
+
+        throw new Error(`Failed to get the profile of ${name}`)
+      } catch(error) {
+        console.log(error)
       }
     },
 
-    update: async () => {
+    update: async (updates) => {
+      const name = getUsername()
       try {
-        //
-      } catch {
-        //
+        const response = await fetch(`${this.apiBase}/social/profiles/${name}`, {
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${getToken()}`,
+            "X-Noroff-API-Key": `${API_KEY}`
+          },
+          method: "PUT",
+          body: JSON.stringify(updates)
+        })
+
+        if (response.ok) {
+          const { data } = await response.json()
+          console.log(data)
+          return data;
+        }
+
+        throw new Error(`Failed to update the profile of ${name}`)
+      } catch(error) {
+        console.log(error)
       }
+    
     }
   }
 }
@@ -218,3 +250,12 @@ const api = new NoroffAPI()
 //api.post.delete("8083") // deleted successfully, id: 8083
 //api.post.create("hello world!") //created successfully, id:8085
 //api.post.update("updated hello world!", "8085") //updated successfully, id: 8085
+
+// const profile = await api.profile.view()
+// console.log(profile.name)
+// console.log(profile._count.posts)
+// console.log(profile._count.followers)
+
+//api.profile.update({
+//  bio: "Student"
+//})
