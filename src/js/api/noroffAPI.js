@@ -1,0 +1,1 @@
+// Noroff class with all the endpoint functions
