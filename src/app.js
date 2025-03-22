@@ -1,10 +1,12 @@
 async function router(pathname = window.location.pathname) {
+  console.log(pathname)
   switch (pathname) {
     case "/":
       // functions and eventListeners for index
       break;
     case "/auth/":
       // functions and eventListeners for auth
+      console.log("Redirect to index?")
       break;
     case "/auth/login/":
       // functions and eventListeners for login
@@ -12,19 +14,20 @@ async function router(pathname = window.location.pathname) {
     case "/auth/register/":
       // functions and eventListeners for register
       break;
-    case "/post/":
-      // functions and eventListeners for post
+    case "/posts/":
+      // functions and eventListeners for feed
       break;
-    case "/post/edit/":
-      // functions and eventListeners for post edit
-      break;
-    case "/post/create/":
-      // functions and eventListeners for post create
+    case "/posts/view/":
+      // functions and eventListeners for single post
       break;
     case "/profile/":
       // functions and eventListeners for profile
       break;
     default:
-      // default functions and eventListeners
+      // default functions and eventListeners / if no matches are found / 404 not found page?
+      // Redirect to index? Or ifUserLoggedIn redirect to feed?
   }
 }
+
+document.addEventListener("DOMContentLoaded", () => router());
+// router()
