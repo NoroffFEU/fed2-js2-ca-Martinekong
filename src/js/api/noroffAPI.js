@@ -71,7 +71,7 @@ export default class NoroffAPI {
   }
 
   allPosts = {
-    view: async () => {
+    viewAll: async () => {
       try {
         const response = await fetch(`${this.apiBase}/social/posts`, {
           headers: this.utils.setupHeaders({ json: false })
@@ -80,6 +80,39 @@ export default class NoroffAPI {
         const { data } = await this.utils.handleResponse(response)
         console.log(data);
         console.log(`Successfully fetched all posts`)
+        return data;
+
+      } catch(error) {
+        console.log(error)
+      }
+    },
+
+    viewFollowing: async () => {
+      try {
+        const response = await fetch(`${this.apiBase}/social/posts/following`, {
+          headers: this.utils.setupHeaders({ json: false })
+        })
+
+        const { data } = await this.utils.handleResponse(response)
+        console.log(data);
+        console.log(`Successfully fetched posts by following`)
+        return data;
+
+      } catch(error) {
+        console.log(error)
+      }
+    },
+
+    viewOwn : async () => {
+      const username = getUsername()
+      try {
+        const response = await fetch(`${this.apiBase}/social/profiles/${username}/posts`, {
+          headers: this.utils.setupHeaders({ json: false })
+        })
+
+        const { data } = await this.utils.handleResponse(response)
+        console.log(data);
+        console.log(`Successfully fetched users posts`)
         return data;
 
       } catch(error) {
@@ -213,7 +246,7 @@ const api = new NoroffAPI()
 //api.auth.register({name, email, password})
 //api.auth.logout()
 
-api.allPosts.view()
+//api.allPosts.view()
 
 //api.post.view("8072")
 //api.post.create("hello world!") //created successfully, id: 8083
