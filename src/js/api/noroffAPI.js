@@ -73,7 +73,7 @@ export default class NoroffAPI {
   allPosts = {
     viewAll: async () => {
       try {
-        const response = await fetch(`${this.apiBase}/social/posts`, {
+        const response = await fetch(`${this.apiBase}/social/posts?_author=true`, {
           headers: this.utils.setupHeaders({ json: false })
         })
 
@@ -89,7 +89,7 @@ export default class NoroffAPI {
 
     viewFollowing: async () => {
       try {
-        const response = await fetch(`${this.apiBase}/social/posts/following`, {
+        const response = await fetch(`${this.apiBase}/social/posts/following?_author=true`, {
           headers: this.utils.setupHeaders({ json: false })
         })
 
@@ -106,7 +106,7 @@ export default class NoroffAPI {
     viewOwn : async () => {
       const username = getUsername()
       try {
-        const response = await fetch(`${this.apiBase}/social/profiles/${username}/posts`, {
+        const response = await fetch(`${this.apiBase}/social/profiles/${username}/posts?_author=true`, {
           headers: this.utils.setupHeaders({ json: false })
         })
 
@@ -124,7 +124,7 @@ export default class NoroffAPI {
   post = {
     view: async (id) => {
       try {
-        const response = await fetch(`${this.apiBase}/social/posts/${id}`, {
+        const response = await fetch(`${this.apiBase}/social/posts/${id}?_author=true`, {
           headers: this.utils.setupHeaders({ json: false })
         })
 
@@ -231,7 +231,44 @@ export default class NoroffAPI {
       } catch(error) {
         console.log(error)
       }
-    }
+    },
+
+    follow: async (user) => {
+      try {
+        const response = await fetch(`${this.apiBase}/social/profiles/${user}/follow`, {
+          headers: this.utils.setupHeaders(),
+          method: "PUT"
+        })
+
+        const {data} = await this.utils.handleResponse(response)
+        console.log(data)
+        console.log(response)
+        console.log(`you are now following: ${user}`)
+        return data;
+
+
+      } catch(error) {
+        console.log(error)
+      }
+    },
+
+    unfollow: async (user) => {
+      try {
+        const response = await fetch(`${this.apiBase}/social/profiles/${user}/unfollow`, {
+          headers: this.utils.setupHeaders(),
+          method: "PUT"
+        })
+
+        const {data} = await this.utils.handleResponse(response)
+        console.log(data)
+        console.log(response)
+        console.log(`you have unfollowed: ${user}`)
+        return data;
+
+      } catch(error) {
+        console.log(error)
+      }
+    },
   }
 }
 
@@ -246,7 +283,9 @@ const api = new NoroffAPI()
 //api.auth.register({name, email, password})
 //api.auth.logout()
 
-//api.allPosts.view()
+//api.allPosts.viewAll()
+//api.allPosts.viewFollowing()
+//api.allPosts.viewOwn()
 
 //api.post.view("8072")
 //api.post.create("hello world!") //created successfully, id: 8083
@@ -261,3 +300,6 @@ const api = new NoroffAPI()
 // api.profile.update({
 //  bio: "Student at Noroff"
 // })
+
+//api.profile.follow(name)
+//api.profile.unfollow(name)
