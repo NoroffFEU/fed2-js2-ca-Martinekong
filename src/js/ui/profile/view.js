@@ -1,4 +1,5 @@
 import NoroffAPI from "../../api/noroffAPI.js"
+import { getUsername } from "../../api/storage.js";
 import { formatPostDate } from "../../utilities/utils.js";
 
 const api = new NoroffAPI();
@@ -65,6 +66,8 @@ function setupProfileInfo(user) {
     bio.textContent = user.bio;
     profileInfoContainer.append(bio);
   }
+
+  profileInfoContainer.append(createProfileBtn())
 }
 
 function setupFollowing(user) {
@@ -74,7 +77,27 @@ function setupFollowing(user) {
     const message = document.createElement("p")
     message.textContent = "This profile follows no one"
     followingContainer.appendChild(message)
+    return;
   }
+
+  user.following.forEach((following) => {
+    const follow = document.createElement("div");
+
+    const followImg = document.createElement("img")
+    followImg.src = following.avatar.url;
+    followImg.alt = following.avatar.alt || `${following.name}'s avatar image`
+    followImg.style.cursor = "pointer";
+
+    followImg.addEventListener("click", () => {
+      window.location.href = `/profile/index.html?user=${encodeURIComponent(following.name)}`
+    })
+
+    const followUsername = document.createElement("p")
+    followUsername.textContent = following.name
+
+    follow.append(followImg, followUsername);
+    followingContainer.append(follow)
+  })
 }
 
 function setupFollowers(user) {
@@ -85,6 +108,25 @@ function setupFollowers(user) {
     message.textContent = "This profile has 0 followers"
     followersContainer.appendChild(message)
   }
+
+  user.followers.forEach((follower) => {
+    const follow = document.createElement("div");
+
+    const followImg = document.createElement("img")
+    followImg.src = follower.avatar.url;
+    followImg.alt = follower.avatar.alt || `${follower.name}'s avatar image`
+    followImg.style.cursor = "pointer";
+
+    followImg.addEventListener("click", () => {
+      window.location.href = `/profile/index.html?user=${encodeURIComponent(follower.name)}`
+    })
+
+    const followUsername = document.createElement("p")
+    followUsername.textContent = follower.name
+
+    follow.append(followImg, followUsername);
+    followersContainer.append(follow)
+  })
 }
 
 function setupPosts(user) {
@@ -93,6 +135,7 @@ function setupPosts(user) {
   if (user.posts.length === 0) {
     const message = document.createElement("p");
     message.textContent = "This user has no posts"
+    message.style.padding = "2rem"
     profilePosts.append(message)
     return;
   }
@@ -142,4 +185,22 @@ function setupPosts(user) {
 
     console.log(post)
   })
+}
+
+function createProfileBtn() {
+  const params = new URLSearchParams(window.location.search);
+  const user = params.get("user");
+  const loggedInUser = getUsername();
+
+  const button = document.createElement("button")
+  button.classList.add("btn", "primary-border")
+
+  if (loggedInUser === user) {
+    button.textContent = "Edit Profile"
+    button.addEventListener("click", () => {
+    window.location.href = `/profile/edit.html?user=${encodeURIComponent(user)}`
+    })
+    console.log(button)
+    return button;
+  }
 }

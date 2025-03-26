@@ -51,11 +51,19 @@ function createPostThumbnail(container, post) {
 
   const authorInfo = document.createElement("div")
   authorInfo.classList.add("author-info")
+
   const authorImg = document.createElement("img")
+  authorImg.style.cursor = "pointer"
   authorImg.src = post.author.avatar.url;
   authorImg.alt = post.author.avatar.alt || `${post.author.name}'s avatar image`;
+
+  authorImg.addEventListener("click", () => {
+    window.location.href = `/profile/index.html?user=${encodeURIComponent(post.author.name)}`
+  })
+
   const authorName = document.createElement("p")
   authorName.textContent = post.author.name;
+
   authorInfo.append(authorImg, authorName)
 
   const postCreated = document.createElement("p")
