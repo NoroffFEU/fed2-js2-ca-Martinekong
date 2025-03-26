@@ -1,5 +1,5 @@
 function displayHeaderButtons(pathname = window.location.pathname) {
-  console.log(pathname)
+  console.log(`Pathname: ${pathname}`)
 
   const headerBtnContainer = document.getElementById("header-btns")
   const button = document.createElement("a")
@@ -16,13 +16,23 @@ function displayHeaderButtons(pathname = window.location.pathname) {
       button.textContent = "Register";
       button.href = "/auth/register";
       headerBtnContainer.append(button);
+      setLogoPath("/")
       break;
     case "/auth/register/":
       button.textContent = "Login";
       button.href = "/auth/login";
       headerBtnContainer.append(button);
+      setLogoPath("/")
       break;
   }
+}
+
+function setLogoPath(path) {
+  const logo = document.getElementById("logo");
+  logo.style.cursor = "pointer"
+  logo.addEventListener("click", () => {
+    window.location.pathname = path
+  })
 }
 
 displayHeaderButtons()

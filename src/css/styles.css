@@ -60,6 +60,7 @@ button {
 .primary-filled {
   background-color: var(--primary);
   color: var(--on-primary);
+  border: none;
 }
 
 .primary-border {

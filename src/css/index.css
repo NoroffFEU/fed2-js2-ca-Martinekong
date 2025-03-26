@@ -35,3 +35,52 @@
   }
 
 }
+
+/* Need to move the input and label CSS when coding the other forms for the site */
+.hero-content.form{
+  align-items: center;
+  text-align: center;
+}
+
+#login-form,
+#register-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  max-width: 400px;
+}
+
+.input-group {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.input-group label {
+  position: absolute;
+  top: -10px;
+  left: 1rem;
+  font-size: 1rem;
+  font-family: var(--ff-body);
+  color: var(--primary);
+  background: white;
+  padding: 0 .5rem; 
+}
+
+.input-group input {
+  min-width: 300px;
+  padding: 1rem 1.3rem;
+  border: 2px solid var(--primary);
+  border-radius: 5px;
+  font-size: 1rem;
+  outline: none;
+  transition: border 0.3s ease;
+}
+
+.input-group input:focus {
+  border-color: #141414;
+}
+
+span {
+  font-weight: 700;
+}
