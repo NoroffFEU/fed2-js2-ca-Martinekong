@@ -7,14 +7,39 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Manrope:wght@200..800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="/src/css/styles.css">
+  <link rel="stylesheet" href="/src/css/content.css">
+
+  <script type="module" src="/src/app.js"></script>
+  <script type="module" src="/src/js/ui/profile/view.js"></script>
   <title>Vibe Social | Profile</title>
 </head>
 <body>
   <header>
     <p id="logo">vibe</p>
+    <h1>profile</h1>
     <div id="header-btns"></div>
   </header>
-  <main></main>
+
+  <main>
+    <div class="profile">
+      <section class="profile-sidebar">
+        <div id="profile-info"></div>
+        <div id="profile-following">
+          <h2>Following</h2>
+        </div>
+        <div id="profile-followers">
+          <h2>Followers</h2>
+        </div>
+      </section>
+      <section id="profile-posts">
+        <h2>Posts</h2>
+      </section>
+    </div>
+    
+  </main>
+
   <footer>
     <p>© 2025 Martine Kongsrud. All rights reserved.</p>
   </footer>

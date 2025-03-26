@@ -1,4 +1,5 @@
 import NoroffAPI from "./js/api/noroffAPI.js";
+import { getUsername } from "./js/api/storage.js";
 
 const api = new NoroffAPI();
 
@@ -42,6 +43,15 @@ async function displayHeaderButtons(pathname = window.location.pathname) {
       button.addEventListener("click", () => {
         api.auth.logout()
       })
+      break;
+    case "/profile/index.html":
+      button.textContent = "Logout"
+      button.href = "/"
+      button.classList.add("secondary-border")
+      headerBtnContainer.append(await createProfileBtn(), button)
+      button.addEventListener("click", () => {
+        api.auth.logout()
+      })
   }
 }
 
@@ -57,7 +67,8 @@ async function createProfileBtn() {
   const profileBtn = document.createElement("img")
   profileBtn.classList.add("profile-btn")
 
-  const profile = await api.profile.view()
+  const user = getUsername()
+  const profile = await api.profile.view(user)
 
   profileBtn.src = profile.avatar.url;
   profileBtn.alt = profile.avatar.alt || `${profile.name}'s avatar image`;

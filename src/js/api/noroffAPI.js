@@ -210,10 +210,9 @@ export default class NoroffAPI {
   }
 
   profile = {
-    view: async () => {
-      const name = getUsername()
+    view: async (name) => {
       try {
-        const response = await fetch(`${this.apiBase}/social/profiles/${name}`, {
+        const response = await fetch(`${this.apiBase}/social/profiles/${name}?_followers=true&_following=true&_posts=true`, {
           headers: this.utils.setupHeaders({ json: false })
         })
 
