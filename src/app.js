@@ -1,33 +1,28 @@
-async function router(pathname = window.location.pathname) {
+function displayHeaderButtons(pathname = window.location.pathname) {
   console.log(pathname)
+
+  const headerBtnContainer = document.getElementById("header-btns")
+  const button = document.createElement("a")
+  button.classList.add("btn", "primary-filled");
+
   switch (pathname) {
     case "/":
-      // functions and eventListeners for index
-      break;
-    case "/auth/":
-      // functions and eventListeners for auth
-      console.log("Redirect to index?")
+    case "/index.html":
+      button.textContent = "Login";
+      button.href = "/auth/login";
+      headerBtnContainer.append(button);
       break;
     case "/auth/login/":
-      // functions and eventListeners for login
+      button.textContent = "Register";
+      button.href = "/auth/register";
+      headerBtnContainer.append(button);
       break;
     case "/auth/register/":
-      // functions and eventListeners for register
+      button.textContent = "Login";
+      button.href = "/auth/login";
+      headerBtnContainer.append(button);
       break;
-    case "/posts/":
-      // functions and eventListeners for feed
-      break;
-    case "/posts/view/":
-      // functions and eventListeners for single post
-      break;
-    case "/profile/":
-      // functions and eventListeners for profile
-      break;
-    default:
-      // default functions and eventListeners / if no matches are found / 404 not found page?
-      // Redirect to index? Or ifUserLoggedIn redirect to feed?
   }
 }
 
-document.addEventListener("DOMContentLoaded", () => router());
-// router()
+displayHeaderButtons()
