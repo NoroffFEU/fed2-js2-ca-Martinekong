@@ -24,7 +24,7 @@ myPostsBtn.addEventListener("click", async () => {
   showFeedContent(posts)
 })
 
-async function showFeedContent(posts) {
+function showFeedContent(posts) {
   const displayContainer = document.getElementById("feed-container");
   displayContainer.innerHTML = "";
 

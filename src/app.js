@@ -1,3 +1,7 @@
+import NoroffAPI from "./js/api/noroffAPI.js";
+
+const api = new NoroffAPI();
+
 function displayHeaderButtons(pathname = window.location.pathname) {
   console.log(`Pathname: ${pathname}`)
 
@@ -32,7 +36,9 @@ function displayHeaderButtons(pathname = window.location.pathname) {
       button.href = "/"
       button.classList.add("secondary-border")
       headerBtnContainer.append(button)
-      // Need to log out the user when this button is clicked
+      button.addEventListener("click", () => {
+        api.auth.logout()
+      })
   }
 }
 
