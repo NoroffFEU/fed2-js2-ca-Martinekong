@@ -2,7 +2,7 @@ import NoroffAPI from "./js/api/noroffAPI.js";
 
 const api = new NoroffAPI();
 
-function displayHeaderButtons(pathname = window.location.pathname) {
+async function displayHeaderButtons(pathname = window.location.pathname) {
   console.log(`Pathname: ${pathname}`)
 
   const headerBtnContainer = document.getElementById("header-btns")
@@ -18,6 +18,7 @@ function displayHeaderButtons(pathname = window.location.pathname) {
       headerBtnContainer.append(button);
       break;
     case "/auth/login/":
+    case "/auth/login/index.html":
       button.textContent = "Register";
       button.href = "/auth/register";
       button.classList.add("primary-filled")
@@ -25,6 +26,7 @@ function displayHeaderButtons(pathname = window.location.pathname) {
       setLogoPath("/")
       break;
     case "/auth/register/":
+    case "/auth/register/index.html":
       button.textContent = "Login";
       button.href = "/auth/login";
       button.classList.add("primary-filled")
@@ -32,10 +34,11 @@ function displayHeaderButtons(pathname = window.location.pathname) {
       setLogoPath("/")
       break;
     case "/posts/":
+    case "/posts/index.html":
       button.textContent = "Logout"
       button.href = "/"
       button.classList.add("secondary-border")
-      headerBtnContainer.append(button)
+      headerBtnContainer.append(await createProfileBtn(), button)
       button.addEventListener("click", () => {
         api.auth.logout()
       })
@@ -48,6 +51,23 @@ function setLogoPath(path) {
   logo.addEventListener("click", () => {
     window.location.pathname = path
   })
+}
+
+async function createProfileBtn() {
+  const profileBtn = document.createElement("img")
+  profileBtn.classList.add("profile-btn")
+
+  const profile = await api.profile.view()
+
+  profileBtn.src = profile.avatar.url;
+  profileBtn.alt = profile.avatar.alt || `${profile.name}'s avatar image`;
+  profileBtn.style.cursor = "pointer"
+
+  profileBtn.addEventListener("click", () => {
+    window.location.href = `/profile/index.html?user=${encodeURIComponent(profile.name)}`;
+  })
+
+  return profileBtn;
 }
 
 displayHeaderButtons()
