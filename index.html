@@ -7,12 +7,32 @@
   <meta name="description" content="">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Manrope:wght@200..800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Manrope:wght@200..800&display=swap" rel="stylesheet">  
   <title>Vibe Social | Connect</title>
-
-  <script type="module" src="/src/js/ui/index.js"></script>
+  <link rel="stylesheet" href="/src/css/styles.css">
+  <link rel="stylesheet" href="/src/css/index.css">
+  <script type="module" src="/src/app.js"></script>
 </head>
 
 <body>
+  <header class="overflow-header">
+    <p id="logo">vibe</p>
+    <div id="header-btns"></div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-content">
+        <h1>where connection happens</h1>
+        <a href="/auth/login/" class="btn primary-filled large">login</a>
+        <a href="/auth/register/" class="btn primary-border large">register</a>
+      </div>
+      <img src="/public/images/vibe-social.png" alt="">
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 Martine Kongsrud. All rights reserved.</p>
+  </footer>
 </body>
 </html>
