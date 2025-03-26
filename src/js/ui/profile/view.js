@@ -4,9 +4,6 @@ import { formatPostDate } from "../../utilities/utils.js";
 
 const api = new NoroffAPI();
 
-// Add Edit btn if user logged in === userProfile
-// Add follow/unfollow btn if another profile
-
 async function renderProfile() {
   const params = new URLSearchParams(window.location.search);
   const username = params.get("user");
@@ -20,7 +17,7 @@ async function renderProfile() {
 
 renderProfile()
 
-function setupProfileInfo(user) {
+async function setupProfileInfo(user) {
   const profileInfoContainer = document.getElementById("profile-info");
 
   const image = document.createElement("img");
@@ -67,7 +64,7 @@ function setupProfileInfo(user) {
     profileInfoContainer.append(bio);
   }
 
-  profileInfoContainer.append(createProfileBtn())
+  profileInfoContainer.append(await createProfileBtn())
 }
 
 function setupFollowing(user) {
@@ -187,20 +184,46 @@ function setupPosts(user) {
   })
 }
 
-function createProfileBtn() {
+async function createProfileBtn() {
   const params = new URLSearchParams(window.location.search);
-  const user = params.get("user");
+  const userProfile = params.get("user");
   const loggedInUser = getUsername();
+  
+  const button = document.createElement("button");
+  button.classList.add("btn", "primary-border");
 
-  const button = document.createElement("button")
-  button.classList.add("btn", "primary-border")
+  if (loggedInUser === userProfile) {
+    button.textContent = "Edit Profile";
+    button.onclick = () => {
+      window.location.href = `/profile/edit.html?user=${encodeURIComponent(loggedInUser)}`;
+    };
+  } else {
+    await updateFollowButton(button, userProfile, loggedInUser);
+  }
 
-  if (loggedInUser === user) {
-    button.textContent = "Edit Profile"
-    button.addEventListener("click", () => {
-    window.location.href = `/profile/edit.html?user=${encodeURIComponent(user)}`
-    })
-    console.log(button)
-    return button;
+  return button;
+}
+
+async function updateFollowButton(button, userProfile, loggedInUser) {
+  try {
+    const loggedInUsersProfile = await api.profile.view(loggedInUser);
+    const isFollowing = loggedInUsersProfile.following.some(profile => profile.name === userProfile);
+
+    button.textContent = isFollowing ? "Unfollow" : "Follow";
+
+    button.onclick = async () => {
+      try {
+        if (isFollowing) {
+          await api.profile.unfollow(userProfile);
+        } else {
+          await api.profile.follow(userProfile);
+        }
+        updateFollowButton(button, userProfile, loggedInUser);
+      } catch (error) {
+        console.error("Error updating follow status:", error);
+      }
+    };
+  } catch (error) {
+    console.error("Error fetching user profile:", error);
   }
 }
