@@ -1,0 +1,20 @@
+:root {
+
+  --primary: rgb(20, 20, 20);
+  --on-primary: rgb(255, 255, 255) ;
+  --primary-hover: ;
+
+  --secondary: ;
+  --on-secondary: ;
+  --secondary-hover: ;
+
+  --background: rgb(247, 247, 247) ;
+  --on-background: rgb(20, 20, 20) ;
+
+  --container: rgb(255, 255, 255) ;
+  --on-container: rgb(20, 20, 20) ;
+
+  --ff-heading: "Manrope", sans-serif ;
+  --ff-body: "Inter", sans-serif ;
+
+}
