@@ -31,3 +31,16 @@ async function router(pathname = window.location.pathname) {
 
 document.addEventListener("DOMContentLoaded", () => router());
 // router()
+
+
+// PWA test (service-worker.js + public/manifest.json)
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker
+    .register('/service-worker.js')
+    .then((registration) => {
+      console.log('Service Worker registered with scope:', registration.scope);
+    })
+    .catch((error) => {
+      console.error('Service Worker registration failed:', error);
+    });
+}
