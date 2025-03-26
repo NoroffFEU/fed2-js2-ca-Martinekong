@@ -2,15 +2,12 @@ import NoroffAPI from "../api/noroffAPI.js"
 
 const api = new NoroffAPI()
 
-// Refactor this so that all posts are displayed as default when the user goes to their feed
+const posts = await api.allPosts.viewAll()
+showFeedContent(posts)
 
-// Now this code is linked to index.html - need to:
-// 1. Remove btns from index, and move them to feed.html
-// 2. Export this functionality/the eventListeners to app.js (router)
-
-const allBtn = document.getElementById("all-posts")
-const followingBtn = document.getElementById("following-posts")
-const ownBtn = document.getElementById("own-posts")
+const allBtn = document.getElementById("all-btn")
+const followingBtn = document.getElementById("following-btn")
+const myPostsBtn = document.getElementById("my-posts-btn")
 
 allBtn.addEventListener("click", async () => {
   const posts = await api.allPosts.viewAll()
@@ -22,7 +19,7 @@ followingBtn.addEventListener("click", async () => {
   showFeedContent(posts)
 })
 
-ownBtn.addEventListener("click", async () => {
+myPostsBtn.addEventListener("click", async () => {
   const posts = await api.allPosts.viewOwn()
   showFeedContent(posts)
 })
@@ -33,6 +30,7 @@ async function showFeedContent(posts) {
 
   if (posts.length === 0) {
     const message = document.createElement("p")
+    message.style.padding = "2rem"
     message.textContent = "No posts match this filter"
     displayContainer.append(message)
     return;
@@ -47,13 +45,27 @@ function createPostThumbnail(container, post) {
   const postContainer = document.createElement("div")
   postContainer.classList.add("post-container")
 
-  const postTitle = document.createElement("h2")
-  postTitle.textContent = post.title
+  const postHeader = document.createElement("div");
+  postHeader.classList.add("post-header")
+
+  const authorInfo = document.createElement("div")
+  authorInfo.classList.add("author-info")
+  const authorImg = document.createElement("img")
+  authorImg.src = post.author.avatar.url;
+  authorImg.alt = post.author.avatar.alt || `${post.author.name}'s avatar image`;
+  const authorName = document.createElement("p")
+  authorName.textContent = post.author.name;
+  authorInfo.append(authorImg, authorName)
 
   const postCreated = document.createElement("p")
   postCreated.textContent = formatPostDate(post.created)
 
-  postContainer.append(postTitle, postCreated)
+  postHeader.append(authorInfo, postCreated)
+
+  const postTitle = document.createElement("h2")
+  postTitle.textContent = post.title
+
+  postContainer.append(postHeader, postTitle)
   
   if (post.body) {
     const postBody = document.createElement("p")

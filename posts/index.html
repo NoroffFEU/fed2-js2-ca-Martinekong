@@ -7,14 +7,41 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Manrope:wght@200..800&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/b47f15c436.js" crossorigin="anonymous"></script>
+
+  <link rel="stylesheet" href="/src/css/styles.css">
+  <link rel="stylesheet" href="/src/css/content.css">
+
+  <script type="module" src="/src/app.js"></script>
+  <script type="module" src="/src/js/ui/feed.js"></script>
   <title>Vibe Social | Feed</title>
 </head>
 <body>
   <header>
     <p id="logo">vibe</p>
+    <h1>feed</h1>
     <div id="header-btns"></div>
   </header>
-  <main></main>
+
+  <main>
+    <section class="content-section">
+      <div class="feed-options">
+        <div class="option-btns">
+          <button id="all-btn" class="btn primary-border">All</button>
+          <button id="following-btn" class="btn primary-border">Following</button>
+          <button id="my-posts-btn" class="btn primary-border">My Posts</button>
+        </div>
+        <input type="search" id="search" name="search" placeholder="Type in search...">
+        <button class="add-post btn primary-border">
+          <i class="fa-solid fa-plus"></i>
+          Add Post
+        </button>
+      </div>
+
+      <div id="feed-container"></div>
+    </section>
+  </main>
+
   <footer>
     <p>© 2025 Martine Kongsrud. All rights reserved.</p>
   </footer>
