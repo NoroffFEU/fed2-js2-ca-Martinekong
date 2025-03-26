@@ -159,7 +159,7 @@ function setupPosts(user) {
 
     postHeader.append(authorInfo, created)
 
-    const postTitle = document.createElement("h2")
+    const postTitle = document.createElement("h3")
     postTitle.textContent = post.title
 
     postContainer.append(postHeader, postTitle)

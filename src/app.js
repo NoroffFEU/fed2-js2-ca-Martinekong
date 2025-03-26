@@ -52,6 +52,7 @@ async function displayHeaderButtons(pathname = window.location.pathname) {
       button.addEventListener("click", () => {
         api.auth.logout()
       })
+      setLogoPath("/posts/")
   }
 }
 

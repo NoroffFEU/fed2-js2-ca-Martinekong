@@ -40,7 +40,7 @@ h1 {
   font-family: var(--ff-heading);
 }
 
-h2, p {
+h2, h3, p {
   font-family: var(--ff-body);
 }
 
