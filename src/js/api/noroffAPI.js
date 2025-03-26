@@ -19,6 +19,7 @@ export default class NoroffAPI {
       if (!response.ok) {
         const errorData = await response.json();
         throw new Error(errorData?.errors?.[0]?.message || "Unknown error occurred");
+        // Create error overlay message
       }
       return response.json()
     }
@@ -38,6 +39,12 @@ export default class NoroffAPI {
         saveUsername(data.name)
         console.log(data)
         console.log(`User successfully logged in`)
+        // Show success overlay message
+
+        // Redirect user to feed page
+        setTimeout(() => {
+          window.location.href = "/posts/";
+        }, 2000);
         return data;
         
       } catch(error) {
@@ -55,6 +62,12 @@ export default class NoroffAPI {
 
         const { data } = await this.utils.handleResponse(response)
         console.log(`User registered successfully`)
+        // Show success overlay message
+
+        // Redirect user to login page
+        setTimeout(() => {
+          window.location.href = "/auth/login/";
+        }, 2000);
         return data;
 
       } catch(error) {
