@@ -134,3 +134,37 @@ footer {
   padding: 2rem;
   text-align: center;
 }
+
+/* Forms */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+  max-width: 400px;
+}
+
+.input-group {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.input-group label {
+  position: absolute;
+  top: -10px;
+  left: 1rem;
+  font-size: 1rem;
+  font-family: var(--ff-body);
+  color: var(--primary);
+  background: white;
+  padding: 0 .5rem; 
+}
+
+.input-group input {
+  min-width: 300px;
+  padding: 1rem 1.3rem;
+  border: 2px solid var(--primary);
+  border-radius: 4px;
+  font-size: 1rem;
+  outline: none;
+}

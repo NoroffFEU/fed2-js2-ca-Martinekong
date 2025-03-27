@@ -53,6 +53,16 @@ async function displayHeaderButtons(pathname = window.location.pathname) {
         api.auth.logout()
       })
       setLogoPath("/posts/")
+      break;
+    case "/profile/edit.html":
+      button.textContent = "Logout"
+      button.href = "/"
+      button.classList.add("secondary-border")
+      headerBtnContainer.append(await createProfileBtn(), button)
+      button.addEventListener("click", () => {
+        api.auth.logout()
+      })
+      setLogoPath("/posts/")
   }
 }
 
@@ -83,3 +93,4 @@ async function createProfileBtn() {
 }
 
 displayHeaderButtons()
+

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Manrope:wght@200..800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="/src/css/styles.css">
+  <link rel="stylesheet" href="/src/css/content.css">
+
+  <script type="module" src="/src/app.js"></script>
+  <script type="module" src="/src/js/ui/profile/update.js"></script>
+  <title>Vibe Social | Edit Profile</title>
+</head>
+<body>
+  <header>
+    <p id="logo">vibe</p>
+    <h1>edit profile</h1>
+    <div id="header-btns"></div>
+  </header>
+
+  <main>
+    <section id="edit-container" class="container">
+      <div id="edit-profile-info"></div>
+
+      <form id="edit-profile-form">
+        <div class="input-group">
+          <input type="text" id="bio" name="bio">
+          <label for="bio">Bio</label>
+        </div>
+        <div class="input-group">
+          <input type="url" id="avatarUrl" name="avatar.url">
+          <label for="image.url">Image Url</label>
+        </div>
+        <div class="input-group">
+          <input type="text" id="avatarAlt" name="avatar.alt">
+          <label for="image.url">Image Alt</label>
+        </div>
+        <button type="submit" class="btn primary-filled large">update</button>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 Martine Kongsrud. All rights reserved.</p>
+  </footer>
+</body>
+</html>
