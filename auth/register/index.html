@@ -1,55 +1,57 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Manrope:wght@200..800&display=swap" rel="stylesheet">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Noroff FED2 JS2 CA</title>
-    <script type="module" src="/src/app.js"></script>
-  </head>
+  <link rel="stylesheet" href="/src/css/styles.css">
+  <link rel="stylesheet" href="/src/css/index.css">
 
-  <body>
-    <h1>Register</h1>
+  <script type="module" src="/src/app.js"></script>
+  <script type="module" src="/src/js/ui/auth/register.js"></script>
 
-    <form name="register">
-      <div>
-        <label for="name">Name</label>
-        <input
-          id="name"
-          type="text"
-          name="name"
-          required
-          maxlength="20"
-          pattern="^[\w]+$"
-          title="Please enter a username using only letters and numbers"
-        />
+  <title>Vibe Social | Register</title>
+</head>
+<body>
+  <header class="overflow-header">
+    <p id="logo">vibe</p>
+    <div id="header-btns"></div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-content form">
+        <h1>register</h1>
+
+        <form id="register-form">
+          <div class="input-group">
+            <input type="text" id="name" name="name" placeholder="Your username" required>
+            <label for="username">Username</label>
+          </div>
+          <div class="input-group">
+            <input type="text" id="email" name="email" placeholder="example@stud.noroff.no" required>
+            <label for="email">Email</label>
+          </div>
+          <div class="input-group">
+            <input type="password" id="password" name="password" placeholder="Your password" required>
+            <label for="password">Password</label>
+          </div>
+          <button type="submit" class="btn primary-filled large">register</button>
+        </form>
+
+        <a href="/auth/login/">Already have an account? <span>Login!</span></a>
+
       </div>
+      <img src="/public/images/vibe-social.png" alt="">
+    </section>
+  </main>
 
-      <div>
-        <label for="email">Email</label>
-        <input
-          id="email"
-          type="email"
-          name="email"
-          required
-          pattern="^[\w\-.]+@(stud\.)?noroff\.no$"
-          title="Please enter a valid noroff.no or stud.noroff.no address"
-        />
-      </div>
-
-      <div>
-        <label for="password">Password</label>
-        <input
-          type="password"
-          name="password"
-          id="password"
-          required
-          minlength="8"
-        />
-      </div>
-
-      <a href="/auth/login/">Login</a>
-      <button>Register</button>
-    </form>
-  </body>
+  <footer>
+    <p>© 2025 Martine Kongsrud. All rights reserved.</p>
+  </footer>
+</body>
 </html>

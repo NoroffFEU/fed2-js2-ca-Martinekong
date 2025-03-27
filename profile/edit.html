@@ -12,32 +12,36 @@
   <link rel="stylesheet" href="/src/css/content.css">
 
   <script type="module" src="/src/app.js"></script>
-  <script type="module" src="/src/js/ui/profile/view.js"></script>
-  <title>Vibe Social | Profile</title>
+  <script type="module" src="/src/js/ui/profile/update.js"></script>
+  <title>Vibe Social | Edit Profile</title>
 </head>
 <body>
   <header>
     <p id="logo">vibe</p>
-    <h1>profile</h1>
+    <h1>edit profile</h1>
     <div id="header-btns"></div>
   </header>
 
   <main>
-    <div class="profile">
-      <section class="profile-sidebar">
-        <div id="profile-info" class="container"></div>
-        <div id="profile-following" class="container">
-          <h2>Following</h2>
+    <section id="edit-container" class="container">
+      <div id="edit-profile-info"></div>
+
+      <form id="edit-profile-form">
+        <div class="input-group">
+          <input type="text" id="bio" name="bio">
+          <label for="bio">Bio</label>
         </div>
-        <div id="profile-followers" class="container">
-          <h2>Followers</h2>
+        <div class="input-group">
+          <input type="url" id="avatarUrl" name="avatar.url">
+          <label for="image.url">Image Url</label>
         </div>
-      </section>
-      <section id="profile-posts" class="container">
-        <h2>Posts</h2>
-      </section>
-    </div>
-    
+        <div class="input-group">
+          <input type="text" id="avatarAlt" name="avatar.alt">
+          <label for="image.url">Image Alt</label>
+        </div>
+        <button type="submit" class="btn primary-filled large">update</button>
+      </form>
+    </section>
   </main>
 
   <footer>
