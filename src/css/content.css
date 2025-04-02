@@ -169,7 +169,11 @@ input {
 }
 
 #edit-post-form {
-  margin: auto;
+  padding: 2rem;
+}
+
+#delete-post-btn {
+  width: 300px;
 }
 
 #edit-profile-info {
