@@ -74,11 +74,11 @@ function formatPostDate(dateToFormat) {
   const diffInDays = Math.floor(diffInHours / 24);
 
   if (diffInSeconds < 60) return "now";
-  if (diffInMinutes < 60) return `${diffInMinutes} min ago`;
-  if (diffInHours < 24) return `${diffInHours} hrs ago`;
-  if (diffInDays === 1) return "1 day ago";
+  if (diffInMinutes < 60) return `${diffInMinutes} min`;
+  if (diffInHours < 24) return `${diffInHours} hrs`;
+  if (diffInDays === 1) return "1 day";
   
-  return `${diffInDays} days ago`;
+  return `${diffInDays} days`;
 }
 
 function addEditBtnToOwnPosts(post) {

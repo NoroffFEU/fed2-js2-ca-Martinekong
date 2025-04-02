@@ -14,22 +14,20 @@ async function displayHeaderButtons(pathname = window.location.pathname) {
     case "/":
     case "/index.html":
       button.textContent = "Login";
-      button.href = "/auth/login";
+      button.href = "/auth/login.html";
       button.classList.add("primary-filled")
       headerBtnContainer.append(button);
       break;
-    case "/auth/login/":
-    case "/auth/login/index.html":
+    case "/auth/login.html":
       button.textContent = "Register";
-      button.href = "/auth/register";
+      button.href = "/auth/register.html";
       button.classList.add("primary-filled")
       headerBtnContainer.append(button);
       setLogoPath("/")
       break;
-    case "/auth/register/":
-    case "/auth/register/index.html":
+    case "/auth/register.html":
       button.textContent = "Login";
-      button.href = "/auth/login";
+      button.href = "/auth/login.html";
       button.classList.add("primary-filled")
       headerBtnContainer.append(button);
       setLogoPath("/")
@@ -40,7 +38,6 @@ async function displayHeaderButtons(pathname = window.location.pathname) {
     case "/profile/edit.html":
     case "/posts/create.html":
     case "/posts/edit.html":
-    case "/posts/view.html":
       button.textContent = "Logout"
       button.href = "/"
       button.classList.add("secondary-border")
@@ -48,7 +45,7 @@ async function displayHeaderButtons(pathname = window.location.pathname) {
       button.addEventListener("click", () => {
         api.auth.logout()
       })
-      setLogoPath("/posts/")
+      setLogoPath("/posts/feed.html")
       break;
   }
 }

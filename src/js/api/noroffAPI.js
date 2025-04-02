@@ -43,7 +43,7 @@ export default class NoroffAPI {
 
         // Redirect user to feed page
         setTimeout(() => {
-          window.location.href = "/posts/";
+          window.location.href = "/posts/feed.html";
         }, 2000);
         return data;
         
@@ -66,7 +66,7 @@ export default class NoroffAPI {
 
         // Redirect user to login page
         setTimeout(() => {
-          window.location.href = "/auth/login/";
+          window.location.href = "/auth/login.html";
         }, 2000);
         return data;
 
