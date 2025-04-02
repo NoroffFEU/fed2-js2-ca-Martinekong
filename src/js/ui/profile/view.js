@@ -1,6 +1,6 @@
 import NoroffAPI from "../../api/noroffAPI.js"
 import { getUsername } from "../../api/storage.js";
-import { formatPostDate, addEditBtnToOwnPosts } from "../../utilities/utils.js";
+import { createPostThumbnail } from "../../utilities/utils.js";
 
 const api = new NoroffAPI();
 
@@ -139,78 +139,6 @@ function setupPosts(user) {
 
   user.posts.forEach((post) => {
     createPostThumbnail(profilePosts, post, user)
-  })
-}
-
-// Almost identical function in feed.js
-function createPostThumbnail(container, post, user) {
-  const postContainer = document.createElement("div")
-  postContainer.classList.add("post-container")
-  postContainer.style.cursor = "pointer"
-
-  const postHeader = document.createElement("div");
-  postHeader.classList.add("post-header")
-
-  const authorInfo = document.createElement("div")
-  authorInfo.classList.add("author-info")
-  const authorImg = document.createElement("img")
-  authorImg.src = user.avatar.url;
-  authorImg.alt = user.avatar.alt || `${user.name}'s avatar image`;
-  const authorName = document.createElement("p")
-  authorName.textContent = post.owner;
-  authorInfo.append(authorImg, authorName)
-
-  const created = document.createElement("p")
-  created.textContent = formatPostDate(post.created)
-
-  postHeader.append(authorInfo, created)
-
-  const postTitle = document.createElement("h3")
-  postTitle.textContent = post.title
-
-  postContainer.append(postHeader, postTitle)
-
-  if (post.body) {
-    const postBody = document.createElement("p")
-    postBody.textContent = post.body
-    postContainer.append(postBody)
-  }
-
-  if (post.media) {
-    const postMedia = document.createElement("img");
-    postMedia.classList.add("post-image")
-    postMedia.src = post.media.url;
-    postMedia.alt = post.media.alt;
-    postContainer.append(postMedia)
-  }
-
-  const EditBtn = addEditBtnToOwnPosts(post);
-  if (EditBtn) {
-    postContainer.append(EditBtn);
-  }
-
-  postContainer.addEventListener("click", () => {
-    displaySingelPostOverlay(post)
-  })
-
-  container.append(postContainer)
-
-  console.log(post)
-}
-
-// Move this function (almost same as in feed.js)
-function displaySingelPostOverlay(post) {
-  const overlayBg = document.createElement("div");
-  overlayBg.classList.add("overlay-bg")
-  const overlay = document.createElement("div");
-  overlay.classList.add("post-overlay")
-
-  createPostThumbnail(overlay, post, user)
-  document.body.append(overlayBg, overlay)
-
-  overlayBg.addEventListener("click", () => {
-    overlayBg.remove()
-    overlay.remove()
   })
 }
 
