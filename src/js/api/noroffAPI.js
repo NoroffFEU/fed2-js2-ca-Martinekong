@@ -151,13 +151,12 @@ export default class NoroffAPI {
       }
     },
 
-    create: async (title) => {
-      const newPost = { title: title }
+    create: async (content) => {
       try {
         const response = await fetch(`${this.apiBase}/social/posts`, {
           headers: this.utils.setupHeaders(),
           method: "POST",
-          body: JSON.stringify(newPost)
+          body: JSON.stringify(content)
         })
 
         const { data } = await this.utils.handleResponse(response);

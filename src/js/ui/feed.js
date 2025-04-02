@@ -6,6 +6,11 @@ const api = new NoroffAPI()
 const posts = await api.allPosts.viewAll()
 showFeedContent(posts)
 
+const addPostBtn = document.getElementById("add-post-btn")
+addPostBtn.addEventListener("click", () => {
+  window.location.href = "/posts/create.html";
+})
+
 const allBtn = document.getElementById("all-btn")
 const followingBtn = document.getElementById("following-btn")
 const myPostsBtn = document.getElementById("my-posts-btn")

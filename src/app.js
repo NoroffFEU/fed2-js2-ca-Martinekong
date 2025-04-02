@@ -38,6 +38,7 @@ async function displayHeaderButtons(pathname = window.location.pathname) {
     case "/posts/index.html":
     case "/profile/index.html":
     case "/profile/edit.html":
+    case "/posts/create.html":
     case "/posts/edit.html":
     case "/posts/view.html":
       button.textContent = "Logout"
