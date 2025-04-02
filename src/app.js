@@ -32,12 +32,11 @@ async function displayHeaderButtons(pathname = window.location.pathname) {
       headerBtnContainer.append(button);
       setLogoPath("/")
       break;
-    case "/posts/":
-    case "/posts/index.html":
+    case "/posts/feed.html":
+    case "/posts/create.html":
+    case "/posts/edit.html":    
     case "/profile/index.html":
     case "/profile/edit.html":
-    case "/posts/create.html":
-    case "/posts/edit.html":
       button.textContent = "Logout"
       button.href = "/"
       button.classList.add("secondary-border")

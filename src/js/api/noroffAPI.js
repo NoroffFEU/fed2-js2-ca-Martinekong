@@ -131,6 +131,21 @@ export default class NoroffAPI {
       } catch(error) {
         console.log(error)
       }
+    },
+
+    search : async (query) => {
+      try {
+        const response = await fetch(`${this.apiBase}/social/posts/search?q=${encodeURIComponent(query)}&_author=true`, {
+          headers: this.utils.setupHeaders({ json: false })
+        })
+
+        const { data } = await this.utils.handleResponse(response);
+        console.log(data)
+        console.log(`Successfully searched through the posts`)
+        return data;
+      } catch(error) {
+        console.log(error)
+      }
     }
   }
 

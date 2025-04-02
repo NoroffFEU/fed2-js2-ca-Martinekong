@@ -7,13 +7,14 @@ const posts = await api.allPosts.viewAll()
 showFeedContent(posts)
 
 const addPostBtn = document.getElementById("add-post-btn")
-addPostBtn.addEventListener("click", () => {
-  window.location.href = "/posts/create.html";
-})
-
 const allBtn = document.getElementById("all-btn");
 const followingBtn = document.getElementById("following-btn");
 const myPostsBtn = document.getElementById("my-posts-btn");
+const searchInput = document.getElementById("search");
+
+addPostBtn.addEventListener("click", () => {
+  window.location.href = "/posts/create.html";
+})
 
 function setActiveButton(activeButton) {
   const buttons = [allBtn, followingBtn, myPostsBtn];
@@ -44,6 +45,16 @@ myPostsBtn.addEventListener("click", async () => {
   showFeedContent(posts);
   setActiveButton(myPostsBtn);
 });
+
+searchInput.addEventListener("input", async (event) => {
+  const query = event.target.value.trim();
+
+  if (query.length > 0) {
+    const posts = await api.allPosts.search(query)
+    showFeedContent(posts)
+    setActiveButton(allBtn)
+  }
+})
 
 function showFeedContent(posts) {
   const displayContainer = document.getElementById("feed-container");

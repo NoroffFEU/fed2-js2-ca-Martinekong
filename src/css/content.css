@@ -30,6 +30,16 @@ main {
   gap: 1rem;
 }
 
+.search {
+  position: relative;
+}
+
+.fa-magnifying-glass {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+}
+
 input {
   padding: 1rem;
   max-height: 40px;
