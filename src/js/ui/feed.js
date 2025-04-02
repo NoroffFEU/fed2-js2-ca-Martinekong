@@ -47,9 +47,11 @@ function showFeedContent(posts) {
   })
 }
 
+// Almost identical function in profile/view.js
 function createPostThumbnail(container, post) {
   const postContainer = document.createElement("div")
   postContainer.classList.add("post-container")
+  postContainer.style.cursor = "pointer"
 
   const postHeader = document.createElement("div");
   postHeader.classList.add("post-header")
@@ -62,7 +64,8 @@ function createPostThumbnail(container, post) {
   authorImg.src = post.author.avatar.url;
   authorImg.alt = post.author.avatar.alt || `${post.author.name}'s avatar image`;
 
-  authorImg.addEventListener("click", () => {
+  authorImg.addEventListener("click", (event) => {
+    event.stopPropagation();
     window.location.href = `/profile/index.html?user=${encodeURIComponent(post.author.name)}`
   })
 
@@ -100,5 +103,25 @@ function createPostThumbnail(container, post) {
   postContainer.append(EditBtn);
   }
 
+  postContainer.addEventListener("click", () => {
+    displaySingelPostOverlay(post)
+  })
+
   container.append(postContainer)
+}
+
+// Move this function (almost same as in profile/view.js)
+function displaySingelPostOverlay(post) {
+  const overlayBg = document.createElement("div");
+  overlayBg.classList.add("overlay-bg")
+  const overlay = document.createElement("div");
+  overlay.classList.add("post-overlay")
+
+  createPostThumbnail(overlay, post)
+  document.body.append(overlayBg, overlay)
+
+  overlayBg.addEventListener("click", () => {
+    overlayBg.remove()
+    overlay.remove()
+  })
 }

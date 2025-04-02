@@ -4,11 +4,11 @@ import { formatPostDate, addEditBtnToOwnPosts } from "../../utilities/utils.js";
 
 const api = new NoroffAPI();
 
-async function renderProfile() {
-  const params = new URLSearchParams(window.location.search);
-  const username = params.get("user");
-  const user = await api.profile.view(username)
+const params = new URLSearchParams(window.location.search);
+const username = params.get("user");
+const user = await api.profile.view(username)
 
+async function renderProfile() {
   setupProfileInfo(user)
   setupFollowing(user)
   setupFollowers(user)
@@ -137,55 +137,80 @@ function setupPosts(user) {
     return;
   }
 
-  const posts = user.posts;
-  posts.forEach((post) => {
-    const postContainer = document.createElement("div")
-    postContainer.classList.add("post-container")
+  user.posts.forEach((post) => {
+    createPostThumbnail(profilePosts, post, user)
+  })
+}
 
-    const postHeader = document.createElement("div");
-    postHeader.classList.add("post-header")
+// Almost identical function in feed.js
+function createPostThumbnail(container, post, user) {
+  const postContainer = document.createElement("div")
+  postContainer.classList.add("post-container")
+  postContainer.style.cursor = "pointer"
 
-    const authorInfo = document.createElement("div")
-    authorInfo.classList.add("author-info")
-    const authorImg = document.createElement("img")
-    authorImg.src = user.avatar.url;
-    authorImg.alt = user.avatar.alt || `${user.name}'s avatar image`;
-    const authorName = document.createElement("p")
-    authorName.textContent = post.owner;
-    authorInfo.append(authorImg, authorName)
+  const postHeader = document.createElement("div");
+  postHeader.classList.add("post-header")
 
-    const created = document.createElement("p")
-    created.textContent = formatPostDate(post.created)
+  const authorInfo = document.createElement("div")
+  authorInfo.classList.add("author-info")
+  const authorImg = document.createElement("img")
+  authorImg.src = user.avatar.url;
+  authorImg.alt = user.avatar.alt || `${user.name}'s avatar image`;
+  const authorName = document.createElement("p")
+  authorName.textContent = post.owner;
+  authorInfo.append(authorImg, authorName)
 
-    postHeader.append(authorInfo, created)
+  const created = document.createElement("p")
+  created.textContent = formatPostDate(post.created)
 
-    const postTitle = document.createElement("h3")
-    postTitle.textContent = post.title
+  postHeader.append(authorInfo, created)
 
-    postContainer.append(postHeader, postTitle)
+  const postTitle = document.createElement("h3")
+  postTitle.textContent = post.title
 
-    if (post.body) {
-      const postBody = document.createElement("p")
-      postBody.textContent = post.body
-      postContainer.append(postBody)
-    }
+  postContainer.append(postHeader, postTitle)
 
-    if (post.media) {
-      const postMedia = document.createElement("img");
-      postMedia.classList.add("post-image")
-      postMedia.src = post.media.url;
-      postMedia.alt = post.media.alt;
-      postContainer.append(postMedia)
-    }
+  if (post.body) {
+    const postBody = document.createElement("p")
+    postBody.textContent = post.body
+    postContainer.append(postBody)
+  }
 
-    const EditBtn = addEditBtnToOwnPosts(post);
-    if (EditBtn) {
+  if (post.media) {
+    const postMedia = document.createElement("img");
+    postMedia.classList.add("post-image")
+    postMedia.src = post.media.url;
+    postMedia.alt = post.media.alt;
+    postContainer.append(postMedia)
+  }
+
+  const EditBtn = addEditBtnToOwnPosts(post);
+  if (EditBtn) {
     postContainer.append(EditBtn);
-    }
+  }
 
-    profilePosts.append(postContainer)
+  postContainer.addEventListener("click", () => {
+    displaySingelPostOverlay(post)
+  })
 
-    console.log(post)
+  container.append(postContainer)
+
+  console.log(post)
+}
+
+// Move this function (almost same as in feed.js)
+function displaySingelPostOverlay(post) {
+  const overlayBg = document.createElement("div");
+  overlayBg.classList.add("overlay-bg")
+  const overlay = document.createElement("div");
+  overlay.classList.add("post-overlay")
+
+  createPostThumbnail(overlay, post, user)
+  document.body.append(overlayBg, overlay)
+
+  overlayBg.addEventListener("click", () => {
+    overlayBg.remove()
+    overlay.remove()
   })
 }
 
@@ -209,7 +234,7 @@ async function createProfileBtn() {
   return button;
 }
 
-export async function updateFollowButton(button, userProfile, loggedInUser) {
+async function updateFollowButton(button, userProfile, loggedInUser) {
   try {
     const loggedInUsersProfile = await api.profile.view(loggedInUser);
     const isFollowing = loggedInUsersProfile.following.some(profile => profile.name === userProfile);

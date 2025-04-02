@@ -52,6 +52,10 @@ input {
   border-bottom: 4px solid rgb(247, 247, 247);
 }
 
+.post-container p:last-of-type {
+  overflow-wrap: break-word;
+}
+
 .post-header {
   display: flex;
   align-items: center;
@@ -218,4 +222,28 @@ input {
   #edit-profile-form {
     margin: 4rem 0;
   }
+}
+
+/* Singel post overlay */
+.overlay-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 4;
+}
+
+.post-overlay {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  min-width: 300px;
+  max-width: 90%;
+  transform: translate(-50%, -50%);
+  background-color: var(--container);
+  border-radius: 4px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  z-index: 5;
 }
