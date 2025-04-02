@@ -1,5 +1,5 @@
 import NoroffAPI from "../api/noroffAPI.js"
-import { formatPostDate } from "../utilities/utils.js"
+import { addEditBtnToOwnPosts, formatPostDate } from "../utilities/utils.js"
 
 const api = new NoroffAPI()
 
@@ -88,6 +88,11 @@ function createPostThumbnail(container, post) {
     postMedia.src = post.media.url;
     postMedia.alt = post.media.alt;
     postContainer.append(postMedia)
+  }
+
+  const EditBtn = addEditBtnToOwnPosts(post);
+  if (EditBtn) {
+  postContainer.append(EditBtn);
   }
 
   container.append(postContainer)

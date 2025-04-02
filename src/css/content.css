@@ -74,6 +74,11 @@ input {
   max-height: 300px;
 }
 
+.post-container button {
+  max-width: 200px;
+  align-self: flex-end;
+}
+
 
 /* PROFILE */
 .profile {

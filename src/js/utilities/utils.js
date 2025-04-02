@@ -1,3 +1,5 @@
+import { getUsername } from "../api/storage.js";
+
 export function formatPostDate(dateToFormat) {
   const postDate = new Date(dateToFormat);
   const now = new Date();
@@ -12,4 +14,24 @@ export function formatPostDate(dateToFormat) {
   if (diffInDays === 1) return "1 day ago";
   
   return `${diffInDays} days ago`;
+}
+
+export function addEditBtnToOwnPosts(post) {
+  const user = getUsername();
+  const button = document.createElement("button");
+  button.classList.add("btn", "primary-border");
+
+  const postOwner = post.author?.name || post.owner;
+
+  if (user !== postOwner) {
+    return null;
+  }
+
+  button.textContent = "Edit Post";
+
+  button.addEventListener("click", () => {
+    window.location.pathname = "/posts/edit"
+  });
+
+  return button;
 }

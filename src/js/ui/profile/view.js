@@ -1,6 +1,6 @@
 import NoroffAPI from "../../api/noroffAPI.js"
 import { getUsername } from "../../api/storage.js";
-import { formatPostDate } from "../../utilities/utils.js";
+import { formatPostDate, addEditBtnToOwnPosts } from "../../utilities/utils.js";
 
 const api = new NoroffAPI();
 
@@ -178,6 +178,11 @@ function setupPosts(user) {
       postContainer.append(postMedia)
     }
 
+    const EditBtn = addEditBtnToOwnPosts(post);
+    if (EditBtn) {
+    postContainer.append(EditBtn);
+    }
+
     profilePosts.append(postContainer)
 
     console.log(post)
@@ -204,7 +209,7 @@ async function createProfileBtn() {
   return button;
 }
 
-async function updateFollowButton(button, userProfile, loggedInUser) {
+export async function updateFollowButton(button, userProfile, loggedInUser) {
   try {
     const loggedInUsersProfile = await api.profile.view(loggedInUser);
     const isFollowing = loggedInUsersProfile.following.some(profile => profile.name === userProfile);
