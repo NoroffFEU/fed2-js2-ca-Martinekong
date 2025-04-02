@@ -30,7 +30,7 @@ export function addEditBtnToOwnPosts(post) {
   button.textContent = "Edit Post";
 
   button.addEventListener("click", () => {
-    window.location.pathname = "/posts/edit"
+    window.location.href = `/posts/edit.html?id=${encodeURIComponent(post.id)}`;
   });
 
   return button;

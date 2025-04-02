@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Manrope:wght@200..800&display=swap" rel="stylesheet">
-  <title>Vibe Social | View Post</title>
+  <title>Vibe Social | Edit Post</title>
 
   <link rel="stylesheet" href="/src/css/styles.css">
   <link rel="stylesheet" href="/src/css/content.css">
@@ -20,9 +20,34 @@
 <body>
   <header>
     <p id="logo">vibe</p>
+    <h1>edit post</h1>
     <div id="header-btns"></div>
   </header>
-  <main></main>
+  
+  <main>
+    <section id="edit-container" class="container">
+      <form id="edit-post-form">
+        <div class="input-group">
+          <input type="text" id="title" name="title">
+          <label for="title">Title</label>
+        </div>
+        <div class="input-group">
+          <input type="text" id="body" name="body">
+          <label for="body">Text</label>
+        </div>
+        <div class="input-group">
+          <input type="url" id="mediaUrl" name="mediaUrl">
+          <label for="mediaUrl">Image Url</label>
+        </div>
+        <div class="input-group">
+          <input type="text" id="mediaAlt" name="mediaAlt">
+          <label for="mediaAlt">Image Url</label>
+        </div>
+        <button type="submit" class="btn primary-filled large">update</button>
+      </form>
+    </section>
+  </main>
+
   <footer>
     <p>© 2025 Martine Kongsrud. All rights reserved.</p>
   </footer>

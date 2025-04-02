@@ -189,13 +189,12 @@ export default class NoroffAPI {
       }
     },
 
-    update: async (title, id) => {
-      const updatedPost = { title: title }
+    update: async (updates, id) => {
       try {
         const response = await fetch(`${this.apiBase}/social/posts/${id}`, {
           headers: this.utils.setupHeaders(),
           method: "PUT", 
-          body: JSON.stringify(updatedPost)
+          body: JSON.stringify(updates)
         })
 
         const { data } = await this.utils.handleResponse(response);
@@ -283,35 +282,3 @@ export default class NoroffAPI {
     },
   }
 }
-
-
-const name = ``
-const email = ``
-const password = ``
-
-const api = new NoroffAPI()
-
-//api.auth.login({email, password})
-//api.auth.register({name, email, password})
-//api.auth.logout()
-
-//api.allPosts.viewAll()
-//api.allPosts.viewFollowing()
-//api.allPosts.viewOwn()
-
-//api.post.view("8072")
-//api.post.create("hello world!") //created successfully, id: 8083
-//api.post.delete("8083") // deleted successfully, id: 8083
-//api.post.update("updated hello world!", "8085") //updated successfully, id: 8085
-
-//const profile = await api.profile.view()
-//console.log(profile.name)
-// console.log(profile._count.posts)
-// console.log(profile._count.followers)
-
-// api.profile.update({
-//  bio: "Student at Noroff"
-// })
-
-//api.profile.follow(name)
-//api.profile.unfollow(name)

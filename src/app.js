@@ -36,36 +36,10 @@ async function displayHeaderButtons(pathname = window.location.pathname) {
       break;
     case "/posts/":
     case "/posts/index.html":
-      button.textContent = "Logout"
-      button.href = "/"
-      button.classList.add("secondary-border")
-      headerBtnContainer.append(await createProfileBtn(), button)
-      button.addEventListener("click", () => {
-        api.auth.logout()
-      })
-      break;
     case "/profile/index.html":
-      button.textContent = "Logout"
-      button.href = "/"
-      button.classList.add("secondary-border")
-      headerBtnContainer.append(await createProfileBtn(), button)
-      button.addEventListener("click", () => {
-        api.auth.logout()
-      })
-      setLogoPath("/posts/")
-      break;
     case "/profile/edit.html":
-      button.textContent = "Logout"
-      button.href = "/"
-      button.classList.add("secondary-border")
-      headerBtnContainer.append(await createProfileBtn(), button)
-      button.addEventListener("click", () => {
-        api.auth.logout()
-      })
-      setLogoPath("/posts/")
-      break;
-    case "/posts/edit/":
-    case "/posts/edit/index.html/":
+    case "/posts/edit.html":
+    case "/posts/view.html":
       button.textContent = "Logout"
       button.href = "/"
       button.classList.add("secondary-border")
