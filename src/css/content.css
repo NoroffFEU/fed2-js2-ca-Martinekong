@@ -6,6 +6,21 @@ main {
   background-color: var(--container);
 }
 
+.container h1 {
+  text-transform: uppercase;
+  font-size: 2rem;
+  margin: 1rem auto;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px; 
+  clip: rect(0, 0, 0, 0);
+  overflow: hidden;
+  white-space: nowrap;
+}
+
 /* FEED */
 .content-section {
   display: flex;
@@ -192,7 +207,7 @@ input {
 }
 
 #create-post-form {
-  margin: auto;
+  margin: 2rem auto;
 }
 
 #edit-profile-info {

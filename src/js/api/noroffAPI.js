@@ -107,7 +107,6 @@ export default class NoroffAPI {
         showMessage(error.message || "Something went wrong", "error");
       } finally {
         hideLoadingSpinner(container)
-        console.log("hide loading spinner")
       }
     },
 
