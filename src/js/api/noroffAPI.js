@@ -1,6 +1,6 @@
 import { API_KEY, BASE_URL } from "./constants.js";
 import { getToken, getUsername, saveToken, saveUsername } from "./storage.js";
-import { showMessage } from "./userFeedback.js"
+import { hideLoadingSpinner, showLoadingSpinner, showMessage } from "./userFeedback.js"
 
 export default class NoroffAPI {
   constructor(apiBase = `${BASE_URL}`) {
@@ -93,8 +93,9 @@ export default class NoroffAPI {
   }
 
   allPosts = {
-    viewAll: async () => {
+    viewAll: async (container) => {
       try {
+        showLoadingSpinner(container)
         const response = await fetch(`${this.apiBase}/social/posts?_author=true`, {
           headers: this.utils.setupHeaders({ json: false })
         })
@@ -104,11 +105,15 @@ export default class NoroffAPI {
 
       } catch(error) {
         showMessage(error.message || "Something went wrong", "error");
+      } finally {
+        hideLoadingSpinner(container)
+        console.log("hide loading spinner")
       }
     },
 
-    viewFollowing: async () => {
+    viewFollowing: async (container) => {
       try {
+        showLoadingSpinner(container)
         const response = await fetch(`${this.apiBase}/social/posts/following?_author=true`, {
           headers: this.utils.setupHeaders({ json: false })
         })
@@ -118,12 +123,15 @@ export default class NoroffAPI {
 
       } catch(error) {
         showMessage(error.message || "Something went wrong", "error");
+      } finally {
+        hideLoadingSpinner(container)
       }
     },
 
-    viewOwn : async () => {
+    viewOwn : async (container) => {
       const username = getUsername();
       try {
+        showLoadingSpinner(container)
         const response = await fetch(`${this.apiBase}/social/profiles/${username}/posts?_author=true`, {
           headers: this.utils.setupHeaders({ json: false })
         })
@@ -133,6 +141,8 @@ export default class NoroffAPI {
 
       } catch(error) {
         showMessage(error.message || "Something went wrong", "error");
+      } finally {
+        hideLoadingSpinner(container)
       }
     },
 
@@ -229,8 +239,11 @@ export default class NoroffAPI {
   }
 
   profile = {
-    view: async (name) => {
+    view: async (name, container = null) => {
       try {
+        if (container) {
+          showLoadingSpinner(container)
+        }
         const response = await fetch(`${this.apiBase}/social/profiles/${name}?_followers=true&_following=true&_posts=true`, {
           headers: this.utils.setupHeaders({ json: false })
         })
@@ -240,6 +253,10 @@ export default class NoroffAPI {
 
       } catch(error) {
         showMessage(error.message || "Something went wrong", "error");
+      } finally {
+        if (container) {
+          hideLoadingSpinner(container)
+        }
       }
     },
 

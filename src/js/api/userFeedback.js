@@ -28,3 +28,17 @@ export function showMessage(message, type) {
     }, 500);
   }, 2000);
 }
+
+export function showLoadingSpinner(container) {
+  if (container.querySelector('.spinner')) return;
+  const spinner = document.createElement("div");
+  spinner.classList.add("spinner")
+  container.append(spinner)
+}
+
+export function hideLoadingSpinner(container) {
+  const spinner = container.querySelector(".spinner");
+  if (spinner) {
+    spinner.remove();
+  }
+}

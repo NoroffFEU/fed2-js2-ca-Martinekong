@@ -6,7 +6,9 @@ const api = new NoroffAPI();
 
 const params = new URLSearchParams(window.location.search);
 const username = params.get("user");
-const user = await api.profile.view(username)
+const container = document.getElementById("profile-posts");
+console.log(container)
+const user = await api.profile.view(username, container)
 
 async function renderProfile() {
   setupProfileInfo(user)

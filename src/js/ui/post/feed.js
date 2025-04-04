@@ -2,8 +2,9 @@ import NoroffAPI from "../../api/noroffAPI.js"
 import { createPostThumbnail } from "../../utilities/utils.js"
 
 const api = new NoroffAPI()
+const displayContainer = document.getElementById("feed-container");
 
-const posts = await api.allPosts.viewAll()
+const posts = await api.allPosts.viewAll(displayContainer)
 showFeedContent(posts)
 
 const addPostBtn = document.getElementById("add-post-btn")
@@ -29,19 +30,19 @@ function setActiveButton(activeButton) {
 }
 
 allBtn.addEventListener("click", async () => {
-  const posts = await api.allPosts.viewAll();
+  const posts = await api.allPosts.viewAll(displayContainer);
   showFeedContent(posts);
   setActiveButton(allBtn);
 });
 
 followingBtn.addEventListener("click", async () => {
-  const posts = await api.allPosts.viewFollowing();
+  const posts = await api.allPosts.viewFollowing(displayContainer);
   showFeedContent(posts);
   setActiveButton(followingBtn);
 });
 
 myPostsBtn.addEventListener("click", async () => {
-  const posts = await api.allPosts.viewOwn();
+  const posts = await api.allPosts.viewOwn(displayContainer);
   showFeedContent(posts);
   setActiveButton(myPostsBtn);
 });
