@@ -24,6 +24,12 @@ export default class NoroffAPI {
         throw new Error(errorMessage);
       }
       return response.json();
+    },
+
+    redirectAfterTimeout: (path, delay) => {
+      setTimeout(() => {
+        window.location.href = path;
+      }, delay);
     }
   }
 
@@ -39,12 +45,10 @@ export default class NoroffAPI {
         const { data } = await this.utils.handleResponse(response);
         saveToken(data.accessToken)
         saveUsername(data.name)
-        const successMessage = "Login success!";
-        showMessage(successMessage, "success");
+        showMessage("Login success!", "success");
 
-        setTimeout(() => {
-          window.location.href = "/posts/feed.html";
-        }, 2000);
+        this.utils.redirectAfterTimeout("/posts/feed.html", 2000)
+
         return data;
         
       } catch(error) {
@@ -61,12 +65,10 @@ export default class NoroffAPI {
         })
 
         const { data } = await this.utils.handleResponse(response)
-        const successMessage = "Register success!";
-        showMessage(successMessage, "success");
+        showMessage("Register success!", "success");
 
-        setTimeout(() => {
-          window.location.href = "/auth/login.html";
-        }, 2000);
+        this.utils.redirectAfterTimeout("/auth/login.html", 2000)
+
         return data;
 
       } catch(error) {
@@ -162,12 +164,10 @@ export default class NoroffAPI {
         })
 
         const { data } = await this.utils.handleResponse(response);
-        const successMessage = "Post created successfully!";
-        showMessage(successMessage, "success");
+        showMessage("Post created successfully!", "success");
 
-        setTimeout(() => {
-          window.location.href = "/posts/feed.html";
-        }, 2000);
+        this.utils.redirectAfterTimeout("/posts/feed.html", 2000)
+
         return data;
 
       } catch(error) {
@@ -183,15 +183,13 @@ export default class NoroffAPI {
         })
 
         if (response.ok) {
-          const successMessage = "Post deleted successfully!";
-          showMessage(successMessage, "success");
-          setTimeout(() => {
-            const user = getUsername()
-            window.location.href = `/profile/index.html?user=${encodeURIComponent(user)}`;
-          }, 2000);
+          showMessage("Post deleted successfully!", "success");
+          const user = getUsername();
+          this.utils.redirectAfterTimeout(`/profile/index.html?user=${encodeURIComponent(user)}`, 2000)
           return;
         }
-  
+
+        showMessage(`Failed to delete post with id ${id}`, "error")
         throw new Error(`Failed to delete post with id ${id}`)
 
       } catch(error) {
@@ -208,13 +206,10 @@ export default class NoroffAPI {
         })
 
         const { data } = await this.utils.handleResponse(response);
-        const successMessage = "Post updated successfully!";
-        showMessage(successMessage, "success");
+        showMessage("Post updated successfully!", "success");
 
-        setTimeout(() => {
-          const user = getUsername()
-          window.location.href = `/profile/index.html?user=${encodeURIComponent(user)}`;
-        }, 2000);
+        const user = getUsername();
+        this.utils.redirectAfterTimeout(`/profile/index.html?user=${encodeURIComponent(user)}`, 2000)
         return data;
 
       } catch(error) {
@@ -248,13 +243,10 @@ export default class NoroffAPI {
         })
 
         const { data } = await this.utils.handleResponse(response);
-        const successMessage = "Profile successfully updated!";
-        showMessage(successMessage, "success");
+        showMessage("Profile updated successfully!", "success");
 
-        setTimeout(() => {
-          const user = getUsername()
-          window.location.href = `/profile/index.html?user=${encodeURIComponent(user)}`;
-        }, 2000);
+        const user = getUsername();
+        this.utils.redirectAfterTimeout(`/profile/index.html?user=${encodeURIComponent(user)}`, 2000)
         return data;
 
       } catch(error) {
@@ -270,8 +262,7 @@ export default class NoroffAPI {
         })
 
         const {data} = await this.utils.handleResponse(response);
-        const successMessage = `You are now following: ${user}`;
-        showMessage(successMessage, "success");
+        showMessage(`You are now following: ${user}`, "success");
         return data;
 
       } catch(error) {
@@ -287,8 +278,7 @@ export default class NoroffAPI {
         })
 
         const {data} = await this.utils.handleResponse(response);
-        const successMessage = `You have unfollowed: ${user}`;
-        showMessage(successMessage, "success")
+        showMessage(`You have unfollowed: ${user}`, "success")
         return data;
 
       } catch(error) {
