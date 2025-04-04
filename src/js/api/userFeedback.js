@@ -1,3 +1,9 @@
+/**
+ * Displays a temporary message notification on the screen.
+ *
+ * @param {string} message - The message text to display.
+ * @param {"success" | "error"} type - The type of message, which affects styling and icon (e.g., "success" or "error").
+ */
 export function showMessage(message, type) {
   const messageContainer = document.createElement("div");
   messageContainer.classList.add("message", type);
@@ -29,6 +35,10 @@ export function showMessage(message, type) {
   }, 2000);
 }
 
+/** 
+ * Displays loading spinner in a container while an API call is being made
+ * @param {HTMLElement} container the container for the spinner
+*/
 export function showLoadingSpinner(container) {
   if (container.querySelector('.spinner')) return;
   const spinner = document.createElement("div");
@@ -36,6 +46,10 @@ export function showLoadingSpinner(container) {
   container.append(spinner)
 }
 
+/**
+ * Removes the loading spinner when the API call is done
+ * @param {HTMLElement} container the container where the spinner has been appended
+ */
 export function hideLoadingSpinner(container) {
   const spinner = container.querySelector(".spinner");
   if (spinner) {

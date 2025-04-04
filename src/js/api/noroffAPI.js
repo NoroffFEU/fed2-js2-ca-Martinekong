@@ -8,6 +8,14 @@ export default class NoroffAPI {
   }
 
   utils = {
+    /**
+     * Sets up the headers for an API request. All options are `true` as default.
+     * @param {Object} [options={}] - The options for the headers.
+     * @param {boolean} [options.auth=true] - Whether to include the authorization header.
+     * @param {boolean} [options.apiKey=true] - Whether to include the API key header.
+     * @param {boolean} [options.json=true] - Whether to include the `Content-Type : application/json` header.
+     * @returns {Object} The header object to be used in the API request. 
+     */
     setupHeaders: ({ auth = true, apiKey = true, json = true} = {}) => {
       const headers = {};
       if (json) headers["Content-Type"] = "application/json";
@@ -16,6 +24,13 @@ export default class NoroffAPI {
       return headers;
     },
 
+    /**
+     * Handles the response on an API call. If the response is not okay, it will throw an error.
+     * @async
+     * @param {Response} response - The response object from the fetch API.
+     * @returns {Promise<Object>} A promise that resolves to the parsed JSON data from the response.
+     * @throws {Error} Throws an error if the response status is not ok. 
+     */
     handleResponse: async (response) => {
       if (!response.ok) {
         const errorData = await response.json();
@@ -26,6 +41,11 @@ export default class NoroffAPI {
       return response.json();
     },
 
+    /**
+     * Redirects the user to another page after a delay.
+     * @param {string} path - The path the user will be redirected to.
+     * @param {number} delay - The number of milliseconds before the redirect.
+     */
     redirectAfterTimeout: (path, delay) => {
       setTimeout(() => {
         window.location.href = path;
@@ -34,6 +54,15 @@ export default class NoroffAPI {
   }
 
   auth = {
+    /**
+     * Logs in a user with provided email and password.
+     * Saves access token and username to localStorage on succes.
+     * Redirects to feed page after successfull login. 
+     * @param {Object} credentials - The login details.
+     * @param {string} credentials.email - The user's email.
+     * @param {string} credentials.password - the user's password.
+     * @returns {Promise<Object | undefined>} The user data if successful, otherwise undefined.
+     */
     login: async ({email, password}) => {
       try {
         const response = await fetch(`${this.apiBase}/auth/login`, {
@@ -61,6 +90,15 @@ export default class NoroffAPI {
       }
     },
 
+    /**
+     * Registers user with provided name, email and password.
+     * Redirects to login page after successfull register.
+     * @param {Object} credentials - The register details.
+     * @param {string} credentials.name - The user's username.
+     * @param {string} credentials.email - The user's email.
+     * @param {string} credentials.password - The user's password.
+     * @returns {Promise<Object | undefined>} The user data if successful, otherwise undefined.
+     */
     register: async ({name, email, password}) => {
       try {
         const response = await fetch(`${this.apiBase}/auth/register`, {
@@ -93,6 +131,11 @@ export default class NoroffAPI {
   }
 
   allPosts = {
+    /**
+     * Fetches all posts including author data and shows a loading spinner while loading.
+     * @param {HTMLElement} container - The HTML element where the spinner is shown.
+     * @returns {Promise<Object[] | undefined>} An array of post objects, or undefined on error.
+     */
     viewAll: async (container) => {
       try {
         showLoadingSpinner(container)
@@ -110,6 +153,12 @@ export default class NoroffAPI {
       }
     },
 
+    /**
+     * Fetches all posts from accounts that the user logged in is following.
+     * Shows loading spinner while loading.
+     * @param {HTMLElement} container  - The HTML element where the spinner is shown.
+     * @returns {Promise<Object[] | undefined>} An array of post objects, or undefined on error.
+     */
     viewFollowing: async (container) => {
       try {
         showLoadingSpinner(container)
@@ -127,6 +176,11 @@ export default class NoroffAPI {
       }
     },
 
+    /**
+     * Fetches all of the users own posts, showing a loading spinner while loading. 
+     * @param {HTMLElement} container - The HTML element where the spinner is shown. 
+     * @returns {Promise<Object[] | undefined>} An array of post objects, or undefined on error.
+     */
     viewOwn : async (container) => {
       const username = getUsername();
       try {
@@ -145,6 +199,11 @@ export default class NoroffAPI {
       }
     },
 
+    /**
+     * Taking the query the user inputs in the search field, and searches through all posts from the API.
+     * @param {string} query - The input from the search field
+     * @returns {Promise<Object[] | undefined>} An array of post objects, or undefined on error.
+     */
     search : async (query) => {
       try {
         const response = await fetch(`${this.apiBase}/social/posts/search?q=${encodeURIComponent(query)}&_author=true`, {
@@ -160,6 +219,11 @@ export default class NoroffAPI {
   }
 
   post = {
+    /**
+     * Gets a single post by its ID from the API, including author information.
+     * @param {number} id - The ID of the post to get.
+     * @returns {Promise<Object | undefined>} A post object, or undefined on error.
+    */
     view: async (id) => {
       try {
         const response = await fetch(`${this.apiBase}/social/posts/${id}?_author=true`, {
@@ -174,6 +238,12 @@ export default class NoroffAPI {
       }
     },
 
+    /**
+     * Creates a new post by sending a POST request to the API. 
+     * Redirects to feed page on success.
+     * @param {Object} content - An object representing the post content. Requires `title`. Can optionally include `body`, `media.url` and `media.alt`.
+     * @returns {Promise<Object | undefined>} The created post object, or undefined on error.
+     */
     create: async (content) => {
       try {
         const response = await fetch(`${this.apiBase}/social/posts`, {
@@ -194,6 +264,12 @@ export default class NoroffAPI {
       }
     },
 
+    /**
+     * Deletes a post by ID from the API.
+     * Redirects to profile page on success.
+     * @param {number} id - The ID of the post to delete.
+     * @returns {Promise<Void | undefined>} Resolves on success, or undefined on error.
+     */
     delete: async (id) => {
       try {
         const response = await fetch(`${this.apiBase}/social/posts/${id}`, {
@@ -216,6 +292,13 @@ export default class NoroffAPI {
       }
     },
 
+    /**
+     * Updates a post by ID in the API.
+     * Redirects to profile on success.
+     * @param {Object} updates - An object containing updated fields. Can include `title`, `body`, `media.url` or `media.alt`.
+     * @param {number} id - The ID of the post to update
+     * @returns {Promise<Object | undefined>} The updated post object, or undefined on error.
+     */
     update: async (updates, id) => {
       try {
         const response = await fetch(`${this.apiBase}/social/posts/${id}`, {
@@ -238,6 +321,12 @@ export default class NoroffAPI {
   }
 
   profile = {
+    /**
+     * Gets a profile by the users name. If the profile will be displayed, the function takes in a container to display loading spinner. 
+     * @param {string} name - The user's name.
+     * @param {HTMLElement} container - The HTML element where the spinner is shown.
+     * @returns {Promise<Object | undefined>} the user object, or undefined on error. 
+     */
     view: async (name, container = null) => {
       try {
         if (container) {
@@ -259,6 +348,11 @@ export default class NoroffAPI {
       }
     },
 
+    /**
+     * Updates the logged in users profile.
+     * @param {Object} updates - An object containing updated fields. Can include `bio`, `avatar.url` or `avatar.alt`.
+     * @returns {Promise<Object | undefined>} The user object, or undefined on error.
+     */
     update: async (updates) => {
       const name = getUsername()
       try {
@@ -280,6 +374,11 @@ export default class NoroffAPI {
       }
     },
 
+    /**
+     * Sends a request to follow the specified user.
+     * @param {string} user  - The username of the user to follow.
+     * @returns {Promise<Object | undefined>} The response data, or undefined on error.
+     */
     follow: async (user) => {
       try {
         const response = await fetch(`${this.apiBase}/social/profiles/${user}/follow`, {
@@ -296,6 +395,11 @@ export default class NoroffAPI {
       }
     },
 
+    /**
+     * Sends a request to unfollow the specified user.
+     * @param {string} user - The username of the user to unfollow.
+     * @returns {Promise<Object | undefined>} The response data, or undefined on error.
+     */
     unfollow: async (user) => {
       try {
         const response = await fetch(`${this.apiBase}/social/profiles/${user}/unfollow`, {
