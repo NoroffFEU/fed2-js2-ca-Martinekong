@@ -7,7 +7,6 @@ const api = new NoroffAPI();
 const params = new URLSearchParams(window.location.search);
 const username = params.get("user");
 const container = document.getElementById("profile-posts");
-console.log(container)
 const user = await api.profile.view(username, container)
 
 async function renderProfile() {
@@ -138,6 +137,8 @@ function setupPosts(user) {
     profilePosts.append(message)
     return;
   }
+
+  user.posts.sort((a, b) => new Date(b.created) - new Date(a.created));
 
   user.posts.forEach((post) => {
     createPostThumbnail(profilePosts, post, user)
