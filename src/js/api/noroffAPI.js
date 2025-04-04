@@ -1,5 +1,6 @@
 import { API_KEY, BASE_URL } from "./constants.js";
 import { getToken, getUsername, saveToken, saveUsername } from "./storage.js";
+import { showSuccessMessage} from "./userFeedback.js"
 
 export default class NoroffAPI {
   constructor(apiBase = `${BASE_URL}`) {
@@ -37,11 +38,9 @@ export default class NoroffAPI {
         const { data } = await this.utils.handleResponse(response);
         saveToken(data.accessToken)
         saveUsername(data.name)
-        console.log(data)
-        console.log(`User successfully logged in`)
-        // Show success overlay message
+        const successMessage = "Login success!"
+        showSuccessMessage(successMessage)
 
-        // Redirect user to feed page
         setTimeout(() => {
           window.location.href = "/posts/feed.html";
         }, 2000);
@@ -61,10 +60,9 @@ export default class NoroffAPI {
         })
 
         const { data } = await this.utils.handleResponse(response)
-        console.log(`User registered successfully`)
-        // Show success overlay message
+        const successMessage = "Register success!"
+        showSuccessMessage(successMessage)
 
-        // Redirect user to login page
         setTimeout(() => {
           window.location.href = "/auth/login.html";
         }, 2000);
@@ -175,8 +173,12 @@ export default class NoroffAPI {
         })
 
         const { data } = await this.utils.handleResponse(response);
-        console.log(data)
-        console.log(`Successfully created a post with the title: ${title}`)
+        const successMessage = "Post created successfully!"
+        showSuccessMessage(successMessage)
+
+        setTimeout(() => {
+          window.location.href = "/posts/feed.html";
+        }, 2000);
         return data;
 
       } catch(error) {
@@ -192,7 +194,12 @@ export default class NoroffAPI {
         })
 
         if (response.ok) {
-          console.log(`Post deleted successfully`)
+          const successMessage = "Post deleted successfully!";
+          showSuccessMessage(successMessage);
+          setTimeout(() => {
+            const user = getUsername()
+            window.location.href = `/profile/index.html?user=${encodeURIComponent(user)}`;
+          }, 2000);
           return;
         }
   
@@ -212,8 +219,13 @@ export default class NoroffAPI {
         })
 
         const { data } = await this.utils.handleResponse(response);
-        console.log(data)
-        console.log(`Post updated successfully`)
+        const successMessage = "Post updated successfully"
+        showSuccessMessage(successMessage)
+
+        setTimeout(() => {
+          const user = getUsername()
+          window.location.href = `/profile/index.html?user=${encodeURIComponent(user)}`;
+        }, 2000);
         return data;
 
       } catch(error) {
@@ -230,8 +242,6 @@ export default class NoroffAPI {
         })
 
         const { data } = await this.utils.handleResponse(response)
-        console.log(data)
-        console.log(`Successfully viewed the users profile`)
         return data;
 
       } catch(error) {
@@ -249,8 +259,13 @@ export default class NoroffAPI {
         })
 
         const { data } = await this.utils.handleResponse(response)
-        console.log(data)
-        console.log(`Successfully updated the users profile`)
+        const successMessage = "Successfully updated the users profile";
+        showSuccessMessage(successMessage)
+
+        setTimeout(() => {
+          const user = getUsername()
+          window.location.href = `/profile/index.html?user=${encodeURIComponent(user)}`;
+        }, 2000);
         return data;
 
       } catch(error) {
@@ -266,11 +281,9 @@ export default class NoroffAPI {
         })
 
         const {data} = await this.utils.handleResponse(response)
-        console.log(data)
-        console.log(response)
-        console.log(`you are now following: ${user}`)
+        const successMessage = `You are now following: ${user}`;
+        showSuccessMessage(successMessage)
         return data;
-
 
       } catch(error) {
         console.log(error)
@@ -285,9 +298,8 @@ export default class NoroffAPI {
         })
 
         const {data} = await this.utils.handleResponse(response)
-        console.log(data)
-        console.log(response)
-        console.log(`you have unfollowed: ${user}`)
+        const successMessage = `You have unfollowed: ${user}`;
+        showSuccessMessage(successMessage)
         return data;
 
       } catch(error) {
