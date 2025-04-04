@@ -42,6 +42,11 @@ export default class NoroffAPI {
           body: JSON.stringify({email, password})
         })
 
+        if (!email || !password) {
+          showMessage("Email and password are required", "error");
+          return;
+        }
+
         const { data } = await this.utils.handleResponse(response);
         saveToken(data.accessToken)
         saveUsername(data.name)
@@ -52,7 +57,7 @@ export default class NoroffAPI {
         return data;
         
       } catch(error) {
-        showMessage(error, "error");
+        showMessage(error.message || "Something went wrong", "error");
       }
     },
 
@@ -64,6 +69,11 @@ export default class NoroffAPI {
           body: JSON.stringify({name, email, password})
         })
 
+        if (!name || !email || !password) {
+          showMessage("Username, email and password are required", "error");
+          return;
+        }
+
         const { data } = await this.utils.handleResponse(response)
         showMessage("Register success!", "success");
 
@@ -72,7 +82,7 @@ export default class NoroffAPI {
         return data;
 
       } catch(error) {
-        showMessage(error, "error")
+        showMessage(error.message || "Something went wrong", "error");
       }
     },
 
@@ -93,7 +103,7 @@ export default class NoroffAPI {
         return data;
 
       } catch(error) {
-        showMessage(error, "error");
+        showMessage(error.message || "Something went wrong", "error");
       }
     },
 
@@ -107,7 +117,7 @@ export default class NoroffAPI {
         return data;
 
       } catch(error) {
-        showMessage(error, "error");
+        showMessage(error.message || "Something went wrong", "error");
       }
     },
 
@@ -122,7 +132,7 @@ export default class NoroffAPI {
         return data;
 
       } catch(error) {
-        showMessage(error, "error");
+        showMessage(error.message || "Something went wrong", "error");
       }
     },
 
@@ -135,7 +145,7 @@ export default class NoroffAPI {
         const { data } = await this.utils.handleResponse(response);
         return data;
       } catch(error) {
-        showMessage(error, "error");
+        showMessage(error.message || "Something went wrong", "error");
       }
     }
   }
@@ -151,7 +161,7 @@ export default class NoroffAPI {
         return data;
 
       } catch(error) {
-        showMessage(error, "error")
+        showMessage(error.message || "Something went wrong", "error");
       }
     },
 
@@ -171,7 +181,7 @@ export default class NoroffAPI {
         return data;
 
       } catch(error) {
-        showMessage(error, "error");
+        showMessage(error.message || "Something went wrong", "error");
       }
     },
 
@@ -193,7 +203,7 @@ export default class NoroffAPI {
         throw new Error(`Failed to delete post with id ${id}`)
 
       } catch(error) {
-        showMessage(error, "error");
+        showMessage(error.message || "Something went wrong", "error");
       }
     },
 
@@ -213,7 +223,7 @@ export default class NoroffAPI {
         return data;
 
       } catch(error) {
-        showMessage(error, "error");
+        showMessage(error.message || "Something went wrong", "error");
       }
     }
   }
@@ -229,7 +239,7 @@ export default class NoroffAPI {
         return data;
 
       } catch(error) {
-        showMessage(error, "error");
+        showMessage(error.message || "Something went wrong", "error");
       }
     },
 
@@ -250,7 +260,7 @@ export default class NoroffAPI {
         return data;
 
       } catch(error) {
-        showMessage(error, "error");
+        showMessage(error.message || "Something went wrong", "error");
       }
     },
 
@@ -266,7 +276,7 @@ export default class NoroffAPI {
         return data;
 
       } catch(error) {
-        showMessage(error, "error");
+        showMessage(error.message || "Something went wrong", "error");
       }
     },
 
@@ -282,7 +292,7 @@ export default class NoroffAPI {
         return data;
 
       } catch(error) {
-        showMessage(error, "error");
+        showMessage(error.message || "Something went wrong", "error");
       }
     },
   }
