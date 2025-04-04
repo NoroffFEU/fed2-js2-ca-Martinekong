@@ -1,14 +1,19 @@
-export function showSuccessMessage(message) {
+export function showMessage(message, type) {
   const messageContainer = document.createElement("div");
-  messageContainer.classList.add("success-message");
+  messageContainer.classList.add("message", type);
 
   const icon = document.createElement("i");
-  icon.classList.add("fa-solid", "fa-circle-check");
 
-  const successMessage = document.createElement("p");
-  successMessage.textContent = message;
+  if (type === "success") {
+    icon.classList.add("fa-solid", "fa-circle-check");
+  } else if (type === "error") {
+    icon.classList.add("fa-solid", "fa-circle-exclamation");
+  }
 
-  messageContainer.append(icon, successMessage);
+  const text = document.createElement("p");
+  text.textContent = message;
+
+  messageContainer.append(icon, text);
   document.body.appendChild(messageContainer);
 
   setTimeout(() => {
@@ -22,8 +27,4 @@ export function showSuccessMessage(message) {
       messageContainer.remove();
     }, 500);
   }, 2000);
-}
-
-export function showErrorMessage(message) {
-  //almost same as success, but needs to be used inside api.utils.handleResponse - maybe exept from the api.post.delete()
 }

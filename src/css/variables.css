@@ -17,6 +17,9 @@
   --success-bg: rgb(214, 255, 220) ;
   --on-success: rgb(38, 70, 43) ;
 
+  --error-bg: rgb(255, 218, 214) ; 
+  --on-error: rgb(64, 0, 2) ;
+
   --ff-logo: "Fredoka", sans-serif ;
   --ff-heading: "Manrope", sans-serif ;
   --ff-body: "Inter", sans-serif ;

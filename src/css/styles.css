@@ -193,13 +193,10 @@ form {
   z-index: 5;
 }
 
-/* When error message is done, much of the same CSS can be applied - refactor! */
-.success-message {
+.message {
   position: fixed;
   bottom: -100px;
   right: 20px;
-  background-color: var(--success-bg);
-  color: var(--on-success);
   padding: 12px 16px;
   border-radius: 4px;
   display: flex;
@@ -212,13 +209,23 @@ form {
   transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
-.success-message.show {
+.message.show {
   opacity: 1;
   transform: translateY(-20px);
   bottom: 20px;
 }
 
-.success-message.hide {
+.message.hide {
   opacity: 0;
   transform: translateY(20px);
+}
+
+.success {
+  background-color: var(--success-bg);
+  color: var(--on-success);
+}
+
+.error {
+  background-color: var(--error-bg);
+  color: var(--on-error);
 }
