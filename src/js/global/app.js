@@ -1,5 +1,5 @@
-import NoroffAPI from "./js/api/noroffAPI.js";
-import { getUsername } from "./js/api/storage.js";
+import NoroffAPI from "../api/noroffAPI.js";
+import { getUsername } from "../api/storage.js";
 
 const api = new NoroffAPI();
 
