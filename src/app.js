@@ -7,54 +7,48 @@ async function displayHeaderButtons(pathname = window.location.pathname) {
   console.log(`Pathname: ${pathname}`)
 
   const headerBtnContainer = document.getElementById("header-btns")
-  const button = document.createElement("a")
-  button.classList.add("btn");
 
   switch (pathname) {
     case "/":
     case "/index.html":
-      button.textContent = "Login";
-      button.href = "/auth/login.html";
-      button.classList.add("primary-filled")
-      headerBtnContainer.append(button);
+    case "/auth/register.html":
+      setLogoPath("/")
+      createPathButton("Login", "/auth/login.html");
       break;
     case "/auth/login.html":
-      button.textContent = "Register";
-      button.href = "/auth/register.html";
-      button.classList.add("primary-filled")
-      headerBtnContainer.append(button);
       setLogoPath("/")
-      break;
-    case "/auth/register.html":
-      button.textContent = "Login";
-      button.href = "/auth/login.html";
-      button.classList.add("primary-filled")
-      headerBtnContainer.append(button);
-      setLogoPath("/")
+      createPathButton("Register", "/auth/register.html")
       break;
     case "/posts/feed.html":
     case "/posts/create.html":
-    case "/posts/edit.html":    
+    case "/posts/edit.html":
     case "/profile/index.html":
     case "/profile/edit.html":
-      button.textContent = "Logout"
-      button.href = "/"
-      button.classList.add("secondary-border")
-      headerBtnContainer.append(await createProfileBtn(), button)
-      button.addEventListener("click", () => {
-        api.auth.logout()
-      })
       setLogoPath("/posts/feed.html")
+      const logoutBtn = createPathButton("Logout", "/", "secondary-border");
+      headerBtnContainer.prepend(await createProfileBtn());
+      logoutBtn.addEventListener("click", () => api.auth.logout());
       break;
   }
 }
 
 function setLogoPath(path) {
   const logo = document.getElementById("logo");
-  logo.style.cursor = "pointer"
-  logo.addEventListener("click", () => {
-    window.location.pathname = path
-  })
+  logo.style.cursor = "pointer";
+  logo.addEventListener("click", () => { window.location.pathname = path });
+}
+
+function createPathButton(text, href, className = "primary-filled") {
+  const headerBtnContainer = document.getElementById("header-btns");
+  if (!headerBtnContainer) return;
+
+  const button = document.createElement("a");
+  button.classList.add("btn", className);
+  button.textContent = text;
+  button.href = href;
+
+  headerBtnContainer.append(button);
+  return button;
 }
 
 async function createProfileBtn() {
@@ -76,4 +70,3 @@ async function createProfileBtn() {
 }
 
 displayHeaderButtons()
-
