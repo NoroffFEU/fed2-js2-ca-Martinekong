@@ -1,1 +1,0 @@
-import{N as r}from"./app-XOvmieRm.js";/* empty css              */const e=new r,m=document.getElementById("login-form");async function i(o){o.preventDefault();const t=new FormData(o.target),n=Object.fromEntries(t);e.auth.login(n)}m.addEventListener("submit",i);

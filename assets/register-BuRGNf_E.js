@@ -1,0 +1,1 @@
+import{N as r}from"./app-Zkx9vH6d.js";/* empty css              */const n=new r,m=document.getElementById("register-form");async function i(t){t.preventDefault();const e=new FormData(t.target),o=Object.fromEntries(e);n.auth.register(o)}m.addEventListener("submit",i);
