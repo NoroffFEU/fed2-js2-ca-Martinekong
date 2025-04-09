@@ -1,5 +1,6 @@
 import NoroffAPI from "../../api/noroffAPI.js"
 import { getUsername } from "../../api/storage.js";
+import { showMessage } from "../../api/userFeedback.js";
 import { authGuard } from "../../utilities/authGuard.js";
 import { createPostThumbnail } from "../../utilities/utils.js";
 
@@ -155,10 +156,10 @@ async function updateFollowButton(button, userProfile, loggedInUser) {
         }
         updateFollowButton(button, userProfile, loggedInUser);
       } catch (error) {
-        console.error("Error updating follow status:", error);
+        showMessage("Error updating follow status", "error")
       }
     };
   } catch (error) {
-    console.error("Error fetching user profile:", error);
+    showMessage("Error fetching user profile", "error")
   }
 }
