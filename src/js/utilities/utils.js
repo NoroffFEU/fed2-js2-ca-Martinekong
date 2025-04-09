@@ -95,7 +95,7 @@ function addEditBtnToOwnPosts(post) {
   button.textContent = "Edit Post";
 
   button.addEventListener("click", () => {
-    window.location.href = `/posts/edit.html?id=${encodeURIComponent(post.id)}`;
+    window.location.href = `./../posts/edit.html?id=${encodeURIComponent(post.id)}`;
   });
 
   return button;

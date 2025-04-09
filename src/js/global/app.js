@@ -39,7 +39,9 @@ async function displayHeaderButtons(pathname = window.location.pathname) {
 function setLogoPath(path) {
   const logo = document.getElementById("logo");
   logo.style.cursor = "pointer";
-  logo.addEventListener("click", () => { window.location.pathname = path });
+  logo.addEventListener("click", () => {
+    window.location.href = path;
+  });
 }
 
 function createPathButton(text, href, className = "primary-filled") {
