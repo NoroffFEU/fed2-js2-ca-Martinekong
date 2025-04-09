@@ -13,6 +13,3 @@ async function onRegisterFormSubmit(event) {
 }
 
 loginForm.addEventListener("submit", onRegisterFormSubmit)
-
-// Todo:
-// Show error overlay if not successfull (fix this in NoroffAPI.js)

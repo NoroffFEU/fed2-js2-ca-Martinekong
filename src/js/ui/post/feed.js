@@ -1,5 +1,8 @@
 import NoroffAPI from "../../api/noroffAPI.js"
+import { authGuard } from "../../utilities/authGuard.js";
 import { createPostThumbnail } from "../../utilities/utils.js"
+
+authGuard();
 
 const api = new NoroffAPI()
 const displayContainer = document.getElementById("feed-container");

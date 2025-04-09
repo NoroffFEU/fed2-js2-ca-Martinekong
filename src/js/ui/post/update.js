@@ -1,4 +1,7 @@
 import NoroffAPI from "../../api/noroffAPI.js";
+import { authGuard } from "../../utilities/authGuard.js";
+
+authGuard();
 
 const api = new NoroffAPI()
 
@@ -7,7 +10,6 @@ const postId = params.get("id");
 
 if (!postId) {
   console.error("No post ID found in URL");
-  // Handle error
 } else {
   console.log("id fetched")
 }

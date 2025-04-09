@@ -1,5 +1,8 @@
 import NoroffAPI from "../../api/noroffAPI.js";
 import { getUsername } from "../../api/storage.js";
+import { authGuard } from "../../utilities/authGuard.js";
+
+authGuard();
 
 const api = new NoroffAPI();
 
