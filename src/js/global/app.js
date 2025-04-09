@@ -4,9 +4,12 @@ import { getUsername } from "../api/storage.js";
 const api = new NoroffAPI();
 
 async function displayHeaderButtons(pathname = window.location.pathname) {
-  const headerBtnContainer = document.getElementById("header-btns")
+  const headerBtnContainer = document.getElementById("header-btns");
+  if (!headerBtnContainer) return;
 
-  switch (pathname) {
+  const trimmedPath = pathname.replace("/fed2-js2-ca-Martinekong", "");
+
+  switch (trimmedPath) {
     case "/":
     case "/index.html":
       setLogoPath("./")
