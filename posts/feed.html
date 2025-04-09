@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Welcome to your feed at Vibe Social! Browse through all posts, filter them by the users you are following, or simply view your own.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Manrope:wght@200..800&display=swap" rel="stylesheet">
+
+  <script src="https://kit.fontawesome.com/b47f15c436.js" crossorigin="anonymous"></script>
+
+  <link rel="icon" type="image/x-icon" href="/fed2-js2-ca-Martinekong/assets/favicon-CWxoUoJN.ico">
+
+
+
+  <title>Vibe Social | Feed</title>
+  <script type="module" crossorigin src="/fed2-js2-ca-Martinekong/assets/feed-BPOap-9t.js"></script>
+  <link rel="modulepreload" crossorigin href="/fed2-js2-ca-Martinekong/assets/app-Yf_zpV-c.js">
+  <link rel="modulepreload" crossorigin href="/fed2-js2-ca-Martinekong/assets/authGuard-14YUcEvN.js">
+  <link rel="modulepreload" crossorigin href="/fed2-js2-ca-Martinekong/assets/utils-Blu-th2_.js">
+  <link rel="stylesheet" crossorigin href="/fed2-js2-ca-Martinekong/assets/app-BTy2QpFm.css">
+  <link rel="stylesheet" crossorigin href="/fed2-js2-ca-Martinekong/assets/authGuard-7Nq9crPf.css">
+</head>
+<body>
+  <header>
+    <p id="logo">vibe</p>
+    <div id="header-btns"></div>
+  </header>
+
+  <main>
+    <section class="content-section container">
+      <h1 class="visually-hidden">feed</h1>
+
+      <div class="feed-options">
+        <div class="option-btns">
+          <button id="all-btn" class="btn primary-filled">All</button>
+          <button id="following-btn" class="btn primary-border">Following</button>
+          <button id="my-posts-btn" class="btn primary-border">My Posts</button>
+        </div>
+        <div class="search">
+          <input type="search" id="search" name="search" placeholder="Type in search..." aria-label="Search posts">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </div>
+        <button class="add-post btn primary-border" id="add-post-btn">
+          <i class="fa-solid fa-plus"></i>
+          Add Post
+        </button>
+      </div>
+
+      <div id="feed-container"></div>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 Martine Kongsrud. All rights reserved.</p>
+  </footer>
+</body>
+</html>
