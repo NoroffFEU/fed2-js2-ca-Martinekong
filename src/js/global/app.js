@@ -4,8 +4,6 @@ import { getUsername } from "../api/storage.js";
 const api = new NoroffAPI();
 
 async function displayHeaderButtons(pathname = window.location.pathname) {
-  console.log(`Pathname: ${pathname}`)
-
   const headerBtnContainer = document.getElementById("header-btns")
 
   switch (pathname) {
