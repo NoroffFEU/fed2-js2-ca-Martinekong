@@ -91,7 +91,7 @@ function setupFollowSection(containerId, users, emptyMessage) {
     avatar.style.cursor = "pointer";
 
     avatar.addEventListener("click", () => {
-      window.location.href = `/profile/index.html?user=${encodeURIComponent(user.name)}`;
+      window.location.href = `./index.html?user=${encodeURIComponent(user.name)}`;
     });
 
     const name = document.createElement("p");
@@ -131,7 +131,7 @@ async function createProfileBtn() {
   if (loggedInUser === userProfile) {
     button.textContent = "Edit Profile";
     button.onclick = () => {
-      window.location.href = `/profile/edit.html?user=${encodeURIComponent(loggedInUser)}`;
+      window.location.href = `./edit.html?user=${encodeURIComponent(loggedInUser)}`;
     };
   } else {
     await updateFollowButton(button, userProfile, loggedInUser);

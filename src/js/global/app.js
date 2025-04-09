@@ -9,21 +9,24 @@ async function displayHeaderButtons(pathname = window.location.pathname) {
   switch (pathname) {
     case "/":
     case "/index.html":
+      setLogoPath("./")
+      createPathButton("Login", "./auth/login.html");
+      break;
     case "/auth/register.html":
-      setLogoPath("/")
-      createPathButton("Login", "/auth/login.html");
+      setLogoPath("./../")
+      createPathButton("Login", "./login.html")
       break;
     case "/auth/login.html":
-      setLogoPath("/")
-      createPathButton("Register", "/auth/register.html")
+      setLogoPath("./../")
+      createPathButton("Register", "./register.html")
       break;
     case "/posts/feed.html":
     case "/posts/create.html":
     case "/posts/edit.html":
     case "/profile/index.html":
     case "/profile/edit.html":
-      setLogoPath("/posts/feed.html")
-      const logoutBtn = createPathButton("Logout", "/", "secondary-border");
+      setLogoPath("./../posts/feed.html")
+      const logoutBtn = createPathButton("Logout", "./../", "secondary-border");
       headerBtnContainer.prepend(await createProfileBtn());
       logoutBtn.addEventListener("click", () => api.auth.logout());
       break;
@@ -61,7 +64,7 @@ async function createProfileBtn() {
   profileBtn.style.cursor = "pointer"
 
   profileBtn.addEventListener("click", () => {
-    window.location.href = `/profile/index.html?user=${encodeURIComponent(profile.name)}`;
+    window.location.href = `./../profile/index.html?user=${encodeURIComponent(profile.name)}`;
   })
 
   return profileBtn;

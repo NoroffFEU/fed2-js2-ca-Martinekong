@@ -81,7 +81,7 @@ export default class NoroffAPI {
         saveUsername(data.name)
         showMessage("Login success!", "success");
 
-        this.utils.redirectAfterTimeout("/posts/feed.html", 2000)
+        this.utils.redirectAfterTimeout("./../posts/feed.html", 2000)
 
         return data;
         
@@ -115,7 +115,7 @@ export default class NoroffAPI {
         const { data } = await this.utils.handleResponse(response)
         showMessage("Register success!", "success");
 
-        this.utils.redirectAfterTimeout("/auth/login.html", 2000)
+        this.utils.redirectAfterTimeout("./login.html", 2000)
 
         return data;
 
@@ -255,7 +255,7 @@ export default class NoroffAPI {
         const { data } = await this.utils.handleResponse(response);
         showMessage("Post created successfully!", "success");
 
-        this.utils.redirectAfterTimeout("/posts/feed.html", 2000)
+        this.utils.redirectAfterTimeout("./feed.html", 2000)
 
         return data;
 
@@ -280,7 +280,7 @@ export default class NoroffAPI {
         if (response.ok) {
           showMessage("Post deleted successfully!", "success");
           const user = getUsername();
-          this.utils.redirectAfterTimeout(`/profile/index.html?user=${encodeURIComponent(user)}`, 2000)
+          this.utils.redirectAfterTimeout(`./../profile/index.html?user=${encodeURIComponent(user)}`, 2000)
           return;
         }
 
@@ -311,7 +311,7 @@ export default class NoroffAPI {
         showMessage("Post updated successfully!", "success");
 
         const user = getUsername();
-        this.utils.redirectAfterTimeout(`/profile/index.html?user=${encodeURIComponent(user)}`, 2000)
+        this.utils.redirectAfterTimeout(`./../profile/index.html?user=${encodeURIComponent(user)}`, 2000)
         return data;
 
       } catch(error) {
@@ -366,7 +366,7 @@ export default class NoroffAPI {
         showMessage("Profile updated successfully!", "success");
 
         const user = getUsername();
-        this.utils.redirectAfterTimeout(`/profile/index.html?user=${encodeURIComponent(user)}`, 2000)
+        this.utils.redirectAfterTimeout(`./index.html?user=${encodeURIComponent(user)}`, 2000)
         return data;
 
       } catch(error) {

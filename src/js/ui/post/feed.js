@@ -17,7 +17,7 @@ const myPostsBtn = document.getElementById("my-posts-btn");
 const searchInput = document.getElementById("search");
 
 addPostBtn.addEventListener("click", () => {
-  window.location.href = "/posts/create.html";
+  window.location.href = "./create.html";
 })
 
 function setActiveButton(activeButton) {

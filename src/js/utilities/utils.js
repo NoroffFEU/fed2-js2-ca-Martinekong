@@ -21,7 +21,7 @@ export function createPostThumbnail(container, post, user) {
 
   authorImg.addEventListener("click", (event) => {
     event.stopPropagation();
-    window.location.href = `/profile/index.html?user=${encodeURIComponent(postOwner.name)}`;
+    window.location.href = `./../profile/index.html?user=${encodeURIComponent(postOwner.name)}`;
   });
 
   const authorName = document.createElement("p");
