@@ -14,8 +14,8 @@ const user = await api.profile.view(username, container)
 
 async function renderProfile() {
   setupProfileInfo(user)
-  setupFollowing(user)
-  setupFollowers(user)
+  setupFollowSection("profile-followers", user.followers, "This user has no followers");
+  setupFollowSection("profile-following", user.following, "This user follows no one");
   setupPosts(user)
 }
 
@@ -71,63 +71,34 @@ async function setupProfileInfo(user) {
   profileInfoContainer.append(await createProfileBtn())
 }
 
-function setupFollowing(user) {
-  const followingContainer = document.getElementById("profile-following");
+function setupFollowSection(containerId, users, emptyMessage) {
+  const container = document.getElementById(containerId);
 
-  if (user.following.length === 0) {
-    const message = document.createElement("p")
-    message.textContent = "This profile follows no one"
-    followingContainer.appendChild(message)
+  if (!users.length) {
+    const message = document.createElement("p");
+    message.textContent = emptyMessage;
+    container.appendChild(message);
     return;
   }
 
-  user.following.forEach((following) => {
-    const follow = document.createElement("div");
+  users.forEach((user) => {
+    const wrapper = document.createElement("div");
 
-    const followImg = document.createElement("img")
-    followImg.src = following.avatar.url;
-    followImg.alt = following.avatar.alt || `${following.name}'s avatar image`
-    followImg.style.cursor = "pointer";
+    const avatar = document.createElement("img");
+    avatar.src = user.avatar.url;
+    avatar.alt = user.avatar.alt || `${user.name}'s avatar image`;
+    avatar.style.cursor = "pointer";
 
-    followImg.addEventListener("click", () => {
-      window.location.href = `/profile/index.html?user=${encodeURIComponent(following.name)}`
-    })
+    avatar.addEventListener("click", () => {
+      window.location.href = `/profile/index.html?user=${encodeURIComponent(user.name)}`;
+    });
 
-    const followUsername = document.createElement("p")
-    followUsername.textContent = following.name
+    const name = document.createElement("p");
+    name.textContent = user.name;
 
-    follow.append(followImg, followUsername);
-    followingContainer.append(follow)
-  })
-}
-
-function setupFollowers(user) {
-  const followersContainer = document.getElementById("profile-followers");
-
-  if (user.followers.length === 0) {
-    const message = document.createElement("p")
-    message.textContent = "This profile has 0 followers"
-    followersContainer.appendChild(message)
-  }
-
-  user.followers.forEach((follower) => {
-    const follow = document.createElement("div");
-
-    const followImg = document.createElement("img")
-    followImg.src = follower.avatar.url;
-    followImg.alt = follower.avatar.alt || `${follower.name}'s avatar image`
-    followImg.style.cursor = "pointer";
-
-    followImg.addEventListener("click", () => {
-      window.location.href = `/profile/index.html?user=${encodeURIComponent(follower.name)}`
-    })
-
-    const followUsername = document.createElement("p")
-    followUsername.textContent = follower.name
-
-    follow.append(followImg, followUsername);
-    followersContainer.append(follow)
-  })
+    wrapper.append(avatar, name);
+    container.append(wrapper);
+  });
 }
 
 function setupPosts(user) {
