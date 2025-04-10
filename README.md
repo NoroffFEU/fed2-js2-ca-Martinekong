@@ -1,29 +1,36 @@
-# Java Script 2 - Vibe Social
+# Vibe Social - JavaScript 2 CA
 
-![Vibe Social screenshot](#)
+![Vibe Social screenshot](vibe-screenshot.webp)
+
+**Vibe Social** is a social media web application where users can register, log in, create posts with images, edit their content, and interact with other users’ posts. This dynamic and responsive application is built using **JavaScript (ES Modules), HTML, and CSS**, and interacts with the **Noroff Social API** for all backend functionality.
 
 ## Description
 
-The **Vibe Social** website was developed as part of a course assignment in JavaScript 2. The goal was to build the front-end for a social media application, using Noroffs social API, and all it's endpoints. Other requirements included making use of ES6 modules and adding JsDocs to at least three functions.
+Vibe Social was created as part of the **JavaScript 2 Course Assignment** at Noroff, showcasing practical skills in modular JavaScript, async/await, API handling, authentication, routing, and dynamic DOM manipulation.
+
+### Features
 
 The website includes the following pages:
 
-- **Home** - Main page where user can go to login or register.
-- **Login** - Where the user can login to their account.
-- **Register** - Where the user can register an account.
-- **Feed** – Where the user can either view all, view following, view their own, or search through posts. Users can click on each post to view it as an overlay, or click the author image on each post to go to that authors profile.
-- **Edit Post** - Where the user can either edit or delete a post.
-- **Create Post** - Where the user can create a new post.
-- **Profile** - Showcasing key information on either the users own account, or other accounts.
-- **Edit Profile** - Where the user can edit their own account information.
+- **Home** – Main landing page with options to log in or register.
+- **Login** – Allows users to sign into their account.
+- **Register** – Enables new users to create an account.
+- **Feed** – Displays all posts, posts by followed users, or the user's own posts. Includes search functionality. Users can:
+  - View posts in an overlay
+  - Click an author's avatar to visit their profile
+- **Create Post** – Lets the user create a new post with media.
+- **Edit Post** – Allows the user to edit or delete their own posts.
+- **Profile** – Displays profile information for any user.
+- **Edit Profile** – Lets the user update their own profile details (avatar and bio).
 
 ## Built With
 
-This project was built using:
-
 - **HTML5**
-- **CSS3 (no frameworks)**
-- **JavaScript (no frameworks)**
+- **CSS3**
+- **JavaScript (ES Modules)**
+- **Vite**
+- **Noroff Social API**
+- **GitHub Pages**
 
 ## Getting Started
 
@@ -37,12 +44,34 @@ To get a local copy of the project up and running:
 git clone https://github.com/NoroffFEU/fed2-js2-ca-Martinekong.git
 ```
 
-2. Open the project in you code editor
+2. Install dependencies
+
+```bash
+npm install
+```
+
+3. Start the local dev server:
+
+```bash
+npm run dev
+```
+
+4. Build the project
+
+```bash
+npm run build
+```
+
+5. Preview the production build
+
+```bash
+npm run preview
+```
 
 ## Deployment
 
 This site is deployed using GitHub pages:  
-🔗 [Vibe Social website](#)
+🔗 [Vibe Social website](https://norofffeu.github.io/fed2-js2-ca-Martinekong/)
 
 ## Contact
 
@@ -53,9 +82,9 @@ If you have any questions or feedback, feel free to reach out:
 
 ## Acknowledgments
 
-Special thanks to:
+Huge thanks to:
 
-- Noroff for the project brief and resources.
-- Teachers for valuable feedback and discussions.
-- Freepik for the images
-- SVG repo for all icons
+- Noroff for providing the project guidelines and Social API
+- Teachers for valuable feedback and support.
+- Unsplash for the royalty-free hero image
+- Vite and GitHub Pages for streamlining the development and deployment process
