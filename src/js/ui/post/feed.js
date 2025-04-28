@@ -36,18 +36,21 @@ allBtn.addEventListener("click", async () => {
   const posts = await api.allPosts.viewAll(displayContainer);
   showFeedContent(posts);
   setActiveButton(allBtn);
+  searchInput.value = "";
 });
 
 followingBtn.addEventListener("click", async () => {
   const posts = await api.allPosts.viewFollowing(displayContainer);
   showFeedContent(posts);
   setActiveButton(followingBtn);
+  searchInput.value = "";
 });
 
 myPostsBtn.addEventListener("click", async () => {
   const posts = await api.allPosts.viewOwn(displayContainer);
   showFeedContent(posts);
   setActiveButton(myPostsBtn);
+  searchInput.value = "";
 });
 
 searchInput.addEventListener("input", async (event) => {
