@@ -4,7 +4,6 @@ import { getUsername } from "../api/storage.js";
 export function createPostThumbnail(container, post, user) {
   const postContainer = document.createElement("div");
   postContainer.classList.add("post-container");
-  postContainer.style.cursor = "pointer";
 
   const postHeader = document.createElement("div");
   postHeader.classList.add("post-header");
@@ -58,9 +57,12 @@ export function createPostThumbnail(container, post, user) {
     postContainer.append(editBtn);
   }
 
-  postContainer.addEventListener("click", () => {
-    displaySingelPostOverlay(post);
-  });
+  if (window.location.pathname.includes("feed.html")) {
+    postContainer.style.cursor = "pointer";
+    postContainer.addEventListener("click", () => {
+      displaySingelPostOverlay(post);
+    });
+  }
 
   container.append(postContainer);
 }
