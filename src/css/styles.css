@@ -1,0 +1,262 @@
+@import url(variables.css);
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  font-family: var(--ff-body);
+}
+
+img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  position: relative;
+}
+
+main {
+  flex: 1;
+  display: flex;
+}
+
+
+/* TYPOGRAPHY */
+h1 {
+  font-family: var(--ff-heading);
+}
+
+h2, h3, p {
+  font-family: var(--ff-body);
+}
+
+/* BUTTONS */
+button {
+  cursor: pointer;
+}
+
+.btn {
+  padding: 0.625rem 1rem;
+  border-radius: 4px;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  text-align: center;
+  font-family: var(--ff-body);
+}
+
+.primary-filled {
+  background-color: var(--primary);
+  color: var(--on-primary);
+  border: none;
+}
+
+.primary-border {
+  background-color: var(--container);
+  color: var(--primary);
+  border: 2px solid var(--primary);
+}
+
+.secondary-border {
+  border: 2px solid var(--on-primary);
+  padding: .3rem .5rem;
+}
+
+.large {
+  font-size: 1.25rem;
+  text-transform: uppercase;
+}
+
+.top-btn {
+  display: none;
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+  background-color: var(--primary);
+  color: var(--on-primary);
+  border: none;
+  border-radius: 4px;
+  padding: 1rem;
+  z-index: 1000;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+  transition: opacity 0.3s ease;
+}
+
+/* Header */
+header {
+  background-color: var(--primary);
+  color: var(--on-primary);
+  padding: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+header h1 {
+  text-transform: uppercase;
+}
+
+#logo {
+  color: var(--on-primary);
+  font-family: var(--ff-logo);
+  text-transform: uppercase;
+  font-size: 1.875rem;
+  font-weight: 700;
+}
+
+.overflow-header {
+  position: absolute;
+  background-color: unset;
+  color: unset;
+  top: 0;
+  right: 0;
+  left: 0;
+}
+
+.overflow-header #logo {
+  color: var(--on-container);
+}
+
+#header-btns {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+}
+
+.profile-btn {
+  height: 33px;
+  width: 33px;
+  border-radius: 100%;
+}
+
+
+/* Footer */
+footer {
+  background-color: var(--primary);
+  color: var(--on-primary);
+  padding: 2rem;
+  text-align: center;
+}
+
+/* Forms */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+  max-width: 400px;
+}
+
+.input-group {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.input-group label {
+  position: absolute;
+  top: -10px;
+  left: 1rem;
+  font-size: 1rem;
+  font-family: var(--ff-body);
+  color: var(--primary);
+  background: white;
+  padding: 0 .5rem; 
+}
+
+.input-group input {
+  min-width: 300px;
+  padding: 1rem 1.3rem;
+  border: 2px solid var(--primary);
+  border-radius: 4px;
+  font-size: 1rem;
+  outline: none;
+}
+
+/* Overlays */
+.overlay-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 4;
+}
+
+.post-overlay {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  min-width: 300px;
+  max-width: 90%;
+  transform: translate(-50%, -50%);
+  background-color: var(--container);
+  border-radius: 4px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  z-index: 5;
+}
+
+.message {
+  position: fixed;
+  bottom: -100px;
+  right: 20px;
+  padding: 12px 16px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.message.show {
+  opacity: 1;
+  transform: translateY(-20px);
+  bottom: 20px;
+}
+
+.message.hide {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.success {
+  background-color: var(--success-bg);
+  color: var(--on-success);
+}
+
+.error {
+  background-color: var(--error-bg);
+  color: var(--on-error);
+}
+
+/* Loading spinner */
+.spinner {
+  border: 4px solid rgba(255, 255, 255, 0.3);
+  border-top: 4px solid var(--primary);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+  margin: 1rem auto;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

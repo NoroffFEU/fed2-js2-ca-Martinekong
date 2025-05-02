@@ -1,0 +1,57 @@
+.hero {
+  display: grid;
+  grid-template-columns: 1fr;
+  align-items: center;
+}
+
+.hero-content {
+  padding: 6rem 2rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+  align-items: center;
+  text-align: center;
+}
+
+.hero-content h1 {
+  font-size: 3.5rem;
+  font-weight: 800;
+  text-transform: capitalize;
+}
+
+.hero-content a {
+  width: 300px;
+}
+
+.hero img {
+  width: 100%;
+  height: auto;
+}
+
+@media screen and (min-width: 800px) {
+  .hero {
+    grid-template-columns: 1fr 1fr;
+  } 
+
+  .hero-content {
+    padding: 4rem;
+  }
+  
+  .hero-content h1 {
+    font-size: 4rem;
+  }
+
+  .hero img {
+    height: 100%;
+  }
+
+}
+
+.hero-content.form{
+  align-items: center;
+  text-align: center;
+}
+
+span {
+  font-weight: 700;
+}

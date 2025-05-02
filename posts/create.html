@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="View either your own, or another users profile. Browse through posts, followers and who they are following.">
+  <meta name="description" content="Create a post at Vibe Social to participate in our community!">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,33 +17,39 @@
   <link rel="stylesheet" href="./../src/css/content.css">
 
   <script type="module" src="./../src/js/global/app.js"></script>
-  <script type="module" src="./../src/js/ui/profile/view.js"></script>
+  <script type="module" src="./../src/js/ui/post/create.js"></script>
 
-  <title>Vibe Social | Profile</title>
+  <title>Vibe Social | Create Post</title>
 </head>
 <body>
   <header>
     <p id="logo">vibe</p>
     <div id="header-btns"></div>
   </header>
-
+  
   <main>
-    <div class="profile">
-      <h1 class="visually-hidden">profile</h1>
-      <section class="profile-sidebar">
-        <div id="profile-info" class="container"></div>
-        <div id="profile-following" class="container">
-          <h2>Following</h2>
+    <section id="edit-container" class="container">
+      <h1>create post</h1>
+      <form id="create-post-form">
+        <div class="input-group">
+          <input type="text" id="title" name="title" required>
+          <label for="title">Title*</label>
         </div>
-        <div id="profile-followers" class="container">
-          <h2>Followers</h2>
+        <div class="input-group">
+          <input type="text" id="body" name="body">
+          <label for="body">Text</label>
         </div>
-      </section>
-      <section id="profile-posts" class="container">
-        <h2>Posts</h2>
-      </section>
-    </div>
-    
+        <div class="input-group">
+          <input type="url" id="mediaUrl" name="mediaUrl">
+          <label for="mediaUrl">Image Url</label>
+        </div>
+        <div class="input-group">
+          <input type="text" id="mediaAlt" name="mediaAlt">
+          <label for="mediaAlt">Image Alt</label>
+        </div>
+        <button type="submit" class="btn primary-filled large">publish</button>
+      </form>
+    </section>
   </main>
 
   <footer>

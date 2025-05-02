@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Log in to your account at Vibe Social to get access to read all posts, publish your own, and connect with the community.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Manrope:wght@200..800&display=swap" rel="stylesheet">
+  
+  <script src="https://kit.fontawesome.com/b47f15c436.js" crossorigin="anonymous"></script>
+
+  <link rel="icon" type="image/x-icon" href="./../public/favicon/favicon.ico">
+
+  <link rel="stylesheet" href="./../src/css/styles.css">
+  <link rel="stylesheet" href="./../src/css/index.css">
+
+  <script type="module" src="./../src/js/global/app.js"></script>
+  <script type="module" src="./../src/js/ui/auth/login.js"></script>
+  
+  <title>Vibe Social | Login</title>
+</head>
+<body>
+  <header class="overflow-header">
+    <p id="logo">vibe</p>
+    <div id="header-btns"></div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-content form">
+        <h1>login</h1>
+
+        <form id="login-form">
+          <div class="input-group">
+            <input type="text" id="email" name="email" placeholder="example@stud.noroff.no" required>
+            <label for="email">Email</label>
+          </div>
+          <div class="input-group">
+            <input type="password" id="password" name="password" placeholder="Your password" required>
+            <label for="password">Password</label>
+          </div>
+          <button type="submit" class="btn primary-filled large">Login</button>
+        </form>
+
+        <a href="./register.html">Don't have an account? <span>Register!</span></a>
+
+      </div>
+      <img src="./../public/images/vibe-social.jpg" alt="a message bubble over a cellphone with a purple and blue background.">
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 Martine Kongsrud. All rights reserved.</p>
+  </footer>
+</body>
+</html>
