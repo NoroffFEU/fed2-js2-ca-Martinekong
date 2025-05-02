@@ -25,9 +25,9 @@ async function showUserInfo() {
 
   editProfileInfo.append(profileImage, infoContainer);
 
-  document.getElementById("bio").placeholder = userToEdit.bio || "Enter your bio...";
-  document.getElementById("avatarUrl").placeholder = userToEdit.avatar.url || "Enter image URL...";
-  document.getElementById("avatarAlt").placeholder = userToEdit.avatar.alt || "Enter image description...";
+  document.getElementById("bio").value = userToEdit.bio || "Enter your bio...";
+  document.getElementById("avatarUrl").value = userToEdit.avatar.url || "Enter image URL...";
+  document.getElementById("avatarAlt").value = userToEdit.avatar.alt || "Enter image description...";
 }
 
 showUserInfo();
